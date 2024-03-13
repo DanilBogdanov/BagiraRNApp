@@ -1,14 +1,19 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 const App = () => {
   return (
-    <NavigationContainer>
-      <View>
-        <Text>App</Text>
-      </View>
-    </NavigationContainer>
+    <QueryClientProvider client={queryClient}>
+      <NavigationContainer>
+        <View>
+          <Text>App</Text>
+        </View>
+      </NavigationContainer>
+    </QueryClientProvider>
   );
 };
 
