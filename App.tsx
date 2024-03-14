@@ -1,6 +1,6 @@
 import {NavigationContainer} from '@react-navigation/native';
 import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
-import TabNavigator from './src/navigation/TabNavigator';
+import TabNavigator from 'navigation/TabNavigator';
 
 const queryClient = new QueryClient();
 

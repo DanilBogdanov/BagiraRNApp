@@ -1,7 +1,7 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {HomeScreen, CartScreen, CatalogScreen, ProfileScreen} from '../screens';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {Screens} from '../types/Screens';
+import {HomeScreen, CatalogScreen, ProfileScreen, CartScreen} from 'screens';
+import {Screens} from 'types/Screens';
 
 type IconProps = {
   name: string;
