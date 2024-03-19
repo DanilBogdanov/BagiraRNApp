@@ -20,5 +20,5 @@ export async function getGoodMenu(animal: Animal): Promise<GoodMenuData[]> {
 
   const {data: goodMenu} = await axios.get<GoodMenuData[]>(path);
 
-  return goodMenu;
+  return goodMenu.sort((a, b) => a.name.localeCompare(b.name));
 }
