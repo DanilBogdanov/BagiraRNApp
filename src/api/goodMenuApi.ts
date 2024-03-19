@@ -1,9 +1,9 @@
 import axios from 'axios';
-import {Animal, GoodMenu} from 'types/goodMenu';
+import {Animal, GoodMenuData} from 'types/goodMenu';
 
 const BASE_URL = 'https://danildev.net/api/bagira/v1/Menu';
 
-export async function getGoodMenu(animal: Animal): Promise<GoodMenu[]> {
+export async function getGoodMenu(animal: Animal): Promise<GoodMenuData[]> {
   let path = BASE_URL;
 
   switch (animal) {
@@ -18,7 +18,7 @@ export async function getGoodMenu(animal: Animal): Promise<GoodMenu[]> {
       break;
   }
 
-  const {data: goodMenu} = await axios.get<GoodMenu[]>(path);
+  const {data: goodMenu} = await axios.get<GoodMenuData[]>(path);
 
   return goodMenu;
 }

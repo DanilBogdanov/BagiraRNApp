@@ -1,8 +1,8 @@
-export interface GoodMenu {
+export interface GoodMenuData {
   id: number;
   name: string;
   path: string;
-  children: GoodMenu[] | null;
+  children: GoodMenuData[] | null;
 }
 
 export enum Animal {
