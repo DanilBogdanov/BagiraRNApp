@@ -18,6 +18,7 @@ const AnimalBar = () => {
     <View style={styles.container}>
       {icons.map(item => (
         <AnimalIcon
+          key={item.animal}
           name={item.name}
           title={item.title}
           active={item.animal === selectedAnimal}
