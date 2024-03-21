@@ -30,7 +30,13 @@ const AnimalBar = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {flexDirection: 'row', justifyContent: 'space-around'},
+  container: {
+    paddingVertical: 5,
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    borderBottomColor: '#eee',
+    borderBottomWidth: 1,
+  },
 });
 
 export default AnimalBar;
