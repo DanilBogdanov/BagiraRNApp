@@ -5,3 +5,16 @@ export interface GoodData {
   imgUrl: string;
   price: number;
 }
+
+export interface GoodResponse {
+  take: number;
+  skip: number;
+  count: number;
+  results: GoodData[];
+}
+
+export interface GoodRequest {
+  groupId?: number;
+  take?: number;
+  skip?: number;
+}

@@ -1,6 +1,8 @@
 import {Image, StyleSheet, Text, View} from 'react-native';
 import {GoodData} from 'types/good';
 
+const BASE_URL = 'https://danildev.net/';
+
 type GoodCardProps = {
   goodData: GoodData;
 };
@@ -8,8 +10,13 @@ type GoodCardProps = {
 const GoodCard = ({goodData}: GoodCardProps) => {
   return (
     <View style={styles.container}>
-      <Image source={{uri: goodData.imgUrl}} height={130} width={130} />
-      <Text numberOfLines={4} style={styles.title}>
+      <Image
+        style={styles.image}
+        source={{uri: BASE_URL + goodData.imgUrl}}
+        height={130}
+        width={130}
+      />
+      <Text numberOfLines={5} style={styles.title}>
         {goodData.name}
       </Text>
       <Text style={styles.price}>{goodData.price}₽</Text>
@@ -23,11 +30,15 @@ const GoodCard = ({goodData}: GoodCardProps) => {
 const styles = StyleSheet.create({
   container: {
     width: 180,
+    justifyContent: 'space-between',
     alignItems: 'center',
     padding: 5,
     rowGap: 5,
     borderRadius: 20,
     backgroundColor: '#fff',
+  },
+  image: {
+    objectFit: 'contain',
   },
   title: {
     color: 'gray',
