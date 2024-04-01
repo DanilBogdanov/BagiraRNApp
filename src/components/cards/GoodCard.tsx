@@ -34,12 +34,16 @@ const GoodCard = ({
       <Text style={styles.price}>{goodData.price}₽</Text>
       {cartCount ? (
         <View style={styles.cartArea}>
-          <Pressable onPress={() => decreaseInCart(goodData.id)}>
-            <Ionicons color={'#4F8EF7'} size={45} name={'remove-circle'} />
+          <Pressable
+            style={styles.countButton}
+            onPress={() => decreaseInCart(goodData.id)}>
+            <Ionicons color={'#fff'} size={30} name={'remove'} />
           </Pressable>
           <Text style={styles.cartCount}>{cartCount}</Text>
-          <Pressable onPress={() => increaseInCart(goodData.id)}>
-            <Ionicons color={'#4F8EF7'} size={45} name={'add-circle'} />
+          <Pressable
+            style={styles.countButton}
+            onPress={() => increaseInCart(goodData.id)}>
+            <Ionicons color={'#fff'} size={30} name={'add'} />
           </Pressable>
         </View>
       ) : (
@@ -85,9 +89,18 @@ const styles = StyleSheet.create({
     color: 'gray',
     fontSize: 16,
   },
+  countButton: {
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+    backgroundColor: '#4F8EF7',
+  },
   buyButton: {
     width: '100%',
-    padding: 10,
+    height: 40,
+    justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
     backgroundColor: '#4F8EF7',
