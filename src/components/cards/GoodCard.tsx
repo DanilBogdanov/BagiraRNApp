@@ -1,13 +1,25 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {memo} from 'react';
+import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 import {GoodData} from 'types/good';
 
 const BASE_URL = 'https://danildev.net/';
 
 type GoodCardProps = {
   goodData: GoodData;
+  cartCount?: number;
+  addToCart: (id: number) => void;
+  increaseInCart: (id: number) => void;
+  decreaseInCart: (id: number) => void;
 };
 
-const GoodCard = ({goodData}: GoodCardProps) => {
+const GoodCard = ({
+  goodData,
+  cartCount,
+  addToCart,
+  increaseInCart,
+  decreaseInCart,
+}: GoodCardProps) => {
   return (
     <View style={styles.container}>
       <Image
@@ -20,9 +32,27 @@ const GoodCard = ({goodData}: GoodCardProps) => {
         {goodData.name}
       </Text>
       <Text style={styles.price}>{goodData.price}₽</Text>
-      <View style={styles.buyButton}>
-        <Text style={styles.buyButtonTitle}>В КОРЗИНУ</Text>
-      </View>
+      {cartCount ? (
+        <View style={styles.cartArea}>
+          <Pressable
+            style={styles.countButton}
+            onPress={() => decreaseInCart(goodData.id)}>
+            <Ionicons color={'#fff'} size={30} name={'remove'} />
+          </Pressable>
+          <Text style={styles.cartCount}>{cartCount}</Text>
+          <Pressable
+            style={styles.countButton}
+            onPress={() => increaseInCart(goodData.id)}>
+            <Ionicons color={'#fff'} size={30} name={'add'} />
+          </Pressable>
+        </View>
+      ) : (
+        <Pressable
+          style={styles.buyButton}
+          onPress={() => addToCart(goodData.id)}>
+          <Text style={styles.buyButtonTitle}>В КОРЗИНУ</Text>
+        </Pressable>
+      )}
     </View>
   );
 };
@@ -49,9 +79,28 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
+  cartArea: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  cartCount: {
+    color: 'gray',
+    fontSize: 16,
+  },
+  countButton: {
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 20,
+    backgroundColor: '#4F8EF7',
+  },
   buyButton: {
     width: '100%',
-    padding: 10,
+    height: 40,
+    justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
     backgroundColor: '#4F8EF7',
@@ -61,4 +110,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default GoodCard;
+export default memo(GoodCard);

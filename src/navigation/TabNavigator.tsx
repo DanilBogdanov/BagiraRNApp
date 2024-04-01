@@ -1,6 +1,7 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {HomeScreen, CatalogScreen, ProfileScreen, CartScreen} from 'screens';
+import {useCartStore} from 'store/cartStore';
 import {Screens} from 'types/Screens';
 
 type IconProps = {
@@ -13,6 +14,8 @@ type IconProps = {
 const Tab = createBottomTabNavigator();
 
 const TabNavigator = () => {
+  const cart = useCartStore(state => state.cart);
+
   const icon = ({name, focused, size, color}: IconProps) => (
     <Ionicons
       name={focused ? name : `${name}-outline`}
@@ -48,6 +51,7 @@ const TabNavigator = () => {
         name={Screens.Cart}
         component={CartScreen}
         options={{
+          tabBarBadge: cart.size,
           tabBarIcon: prop => icon({name: 'cart', ...prop}),
         }}
       />
