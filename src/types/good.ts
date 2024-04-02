@@ -1,0 +1,20 @@
+export interface GoodData {
+  id: number;
+  name: string;
+  description: string | null;
+  imgUrl: string;
+  price: number;
+}
+
+export interface GoodResponse {
+  take: number;
+  skip: number;
+  count: number;
+  results: GoodData[];
+}
+
+export interface GoodRequest {
+  groupId?: number;
+  take?: number;
+  skip?: number;
+}
