@@ -31,7 +31,7 @@ const GoodMenuListItem = ({
             <Ionicons
               color={isExpanded ? '#4F8EF7' : '#c9c9c9'}
               size={20}
-              name={isExpanded ? 'chevron-down' : 'chevron-forward'}
+              name={isExpanded ? 'chevron-up' : 'chevron-down'}
             />
           </View>
         </Pressable>
