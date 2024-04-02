@@ -1,4 +1,4 @@
-import {Pressable, View, Text, StyleSheet} from 'react-native';
+import {Pressable, Text, StyleSheet} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 type AnimalIconProps = {
@@ -10,15 +10,15 @@ type AnimalIconProps = {
 
 const AnimalIcon = ({name, title, active, onPress}: AnimalIconProps) => {
   return (
-    <Pressable onPress={onPress}>
-      <View style={[styles.container, active && styles.active]}>
-        <MaterialCommunityIcons
-          name={name}
-          size={30}
-          color={active ? '#4F8EF7' : '#c9c9c9'}
-        />
-        <Text style={[styles.text, active && styles.active]}>{title}</Text>
-      </View>
+    <Pressable
+      style={[styles.container, active && styles.active]}
+      onPress={onPress}>
+      <MaterialCommunityIcons
+        name={name}
+        size={30}
+        color={active ? '#4F8EF7' : '#c9c9c9'}
+      />
+      <Text style={[styles.text, active && styles.active]}>{title}</Text>
     </Pressable>
   );
 };
