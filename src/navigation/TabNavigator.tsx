@@ -54,6 +54,7 @@ const TabNavigator = () => {
         name={Screens.Cart}
         component={CartScreen}
         options={{
+          unmountOnBlur: true,
           title: 'Корзина',
           tabBarBadge: cart.size,
           tabBarIcon: prop => icon({name: 'cart', ...prop}),
