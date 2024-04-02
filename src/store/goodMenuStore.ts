@@ -17,6 +17,8 @@ export const useGoodMenuStore = create<GoodMenuStore>()(
     setSelectedAnimal: (animal: Animal) =>
       set(state => {
         state.selectedAnimal = animal;
+        state.selectedGroup = null;
+        state.expanded = [];
       }),
     selectedGroup: null,
     setSelectedGroup: (id: number) =>

@@ -1,4 +1,3 @@
-import {useEffect} from 'react';
 import {ActivityIndicator, FlatList, StyleSheet, View} from 'react-native';
 import GoodMenuListItem from './GoodMenuListItem';
 import {useGoodMenuStore} from 'store/goodMenuStore';
@@ -16,8 +15,6 @@ const GoodMenuList = () => {
     isSuccess: isGoodMenuDataSuccess,
     isLoading: isGoodMenuDataLoading,
   } = useGoodMenuQuery(selectedAnimal);
-
-  useEffect(() => setExpanded([]), [selectedAnimal, setExpanded]);
 
   const getList = (items: GoodMenuData[]) => {
     return (
