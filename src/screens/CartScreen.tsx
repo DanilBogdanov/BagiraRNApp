@@ -43,7 +43,6 @@ const CartScreen = () => {
       {(isPlaceholderData || isGoodsSuccess) && (
         <>
           <FlatList
-            style={styles.list}
             data={goods}
             keyExtractor={item => item.id.toString()}
             contentContainerStyle={styles.row}
@@ -81,13 +80,9 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'space-between',
   },
-  list: {
-    flex: 1,
-  },
   row: {
     gap: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 20,
+    padding: 10,
   },
   text: {
     fontSize: 16,
