@@ -31,6 +31,9 @@ const GoodList = () => {
         <FlatList
           data={goodResponse.results}
           keyExtractor={item => item.id.toString()}
+          numColumns={2}
+          contentContainerStyle={styles.listContainer}
+          columnWrapperStyle={styles.listRow}
           renderItem={({item}) => (
             <GoodCard
               goodData={item}
@@ -40,8 +43,6 @@ const GoodList = () => {
               decreaseInCart={decreaseInCart}
             />
           )}
-          numColumns={2}
-          columnWrapperStyle={styles.listRow}
         />
       )}
     </>
@@ -50,8 +51,11 @@ const GoodList = () => {
 
 const styles = StyleSheet.create({
   listRow: {
-    justifyContent: 'space-around',
-    marginTop: 10,
+    justifyContent: 'space-between',
+  },
+  listContainer: {
+    gap: 10,
+    padding: 10,
   },
 });
 
