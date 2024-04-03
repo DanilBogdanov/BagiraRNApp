@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
-    backgroundColor: '#4F8EF7',
+    backgroundColor: '#4F8EF799',
   },
   buyButton: {
     width: '100%',
