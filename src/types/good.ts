@@ -4,6 +4,7 @@ export interface GoodData {
   description: string | null;
   imgUrl: string;
   price: number;
+  rest?: number;
 }
 
 export interface GoodResponse {
