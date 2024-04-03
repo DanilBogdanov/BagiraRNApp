@@ -56,7 +56,10 @@ const TabNavigator = () => {
         options={{
           unmountOnBlur: true,
           title: 'Корзина',
-          tabBarBadge: cart.size,
+          tabBarBadge: Array.from(cart.values()).reduce(
+            (acc, curr) => acc + curr,
+            0,
+          ),
           tabBarIcon: prop => icon({name: 'cart', ...prop}),
         }}
       />
