@@ -12,17 +12,12 @@ const GoodList = () => {
   const increaseInCart = useCartStore(state => state.increase);
   const decreaseInCart = useCartStore(state => state.decrease);
 
-  const getRequest = () => {
-    if (selectedGroup === null) {
-      return {};
-    }
-
-    return {groupId: selectedGroup};
-  };
-
   const {data: goodResponse, isSuccess: isGoodsSuccess} = useGoodsQuery(
     selectedAnimal,
-    getRequest(),
+    {
+      groupId: selectedGroup,
+      take: 30,
+    },
   );
 
   return (

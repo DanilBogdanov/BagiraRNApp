@@ -15,7 +15,7 @@ export interface GoodResponse {
 }
 
 export interface GoodRequest {
-  groupId?: number;
+  groupId: number | null;
   take?: number;
   skip?: number;
 }
