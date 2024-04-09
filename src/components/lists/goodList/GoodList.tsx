@@ -1,6 +1,6 @@
-import {FlatList, StyleSheet} from 'react-native';
+import {ActivityIndicator, FlatList, StyleSheet} from 'react-native';
 import GoodCard from 'components/cards/GoodCard';
-import {useGoodsQuery} from 'queries/goodQuery';
+import {useGoodsInfiniteQuery} from 'queries/goodQuery';
 import {useCartStore} from 'store/cartStore';
 import {useGoodMenuStore} from 'store/goodMenuStore';
 
@@ -12,26 +12,23 @@ const GoodList = () => {
   const increaseInCart = useCartStore(state => state.increase);
   const decreaseInCart = useCartStore(state => state.decrease);
 
-  const getRequest = () => {
-    if (selectedGroup === null) {
-      return {};
-    }
-
-    return {groupId: selectedGroup};
-  };
-
-  const {data: goodResponse, isSuccess: isGoodsSuccess} = useGoodsQuery(
-    selectedAnimal,
-    getRequest(),
-  );
+  const {data, isSuccess, hasNextPage, isFetchingNextPage, fetchNextPage} =
+    useGoodsInfiniteQuery(selectedAnimal, selectedGroup);
 
   return (
     <>
-      {isGoodsSuccess && (
+      {isSuccess && (
         <FlatList
-          data={goodResponse.results}
+          data={data?.pages.map(page => page.results).flat()}
           keyExtractor={item => item.id.toString()}
           numColumns={2}
+          onEndReachedThreshold={2}
+          onEndReached={() => {
+            hasNextPage && !isFetchingNextPage && fetchNextPage();
+          }}
+          ListFooterComponent={
+            <>{isFetchingNextPage && <ActivityIndicator size={50} />}</>
+          }
           contentContainerStyle={styles.listContainer}
           columnWrapperStyle={styles.listRow}
           renderItem={({item}) => (

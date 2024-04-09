@@ -12,10 +12,14 @@ export async function getGood(id: number) {
   return good;
 }
 
-export async function getGoods(
-  animal: Animal,
-  goodRequest: GoodRequest,
-): Promise<GoodResponse> {
+export async function getGoods({
+  pageParam: {animal, goodRequest},
+}: {
+  pageParam: {
+    animal: Animal;
+    goodRequest: GoodRequest;
+  };
+}): Promise<GoodResponse> {
   let path = BASE_URL;
 
   switch (animal) {
