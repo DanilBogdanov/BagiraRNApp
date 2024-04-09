@@ -1,5 +1,5 @@
 import {memo} from 'react';
-import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
+import {Alert, Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {GoodData} from 'types/good';
 
@@ -20,6 +20,28 @@ const CartGoodCard = ({
   increaseInCart,
   decreaseInCart,
 }: CartGoodCardProps) => {
+  const onRemoveFromCart = () => {
+    Alert.alert(
+      'Удалить из корзины?',
+      `${goodData.name}`,
+      [
+        {text: 'Удалить', onPress: () => removeFromCart(goodData.id)},
+        {text: 'Отмена'},
+      ],
+      {
+        cancelable: true,
+      },
+    );
+  };
+
+  const onDecreaseInCart = () => {
+    if (cartCount === 1) {
+      onRemoveFromCart();
+    } else {
+      decreaseInCart(goodData.id);
+    }
+  };
+
   return (
     <>
       <View style={styles.container}>
@@ -39,9 +61,7 @@ const CartGoodCard = ({
           </View>
           <View style={styles.actions}>
             <View style={styles.cartArea}>
-              <Pressable
-                style={styles.countButton}
-                onPress={() => decreaseInCart(goodData.id)}>
+              <Pressable style={styles.countButton} onPress={onDecreaseInCart}>
                 <Ionicons color={'#fff'} size={30} name={'remove'} />
               </Pressable>
               <Text style={styles.cartCount}>{cartCount}</Text>
@@ -51,7 +71,7 @@ const CartGoodCard = ({
                 <Ionicons color={'#fff'} size={30} name={'add'} />
               </Pressable>
             </View>
-            <Pressable onPress={() => removeFromCart(goodData.id)}>
+            <Pressable onPress={onRemoveFromCart}>
               <Ionicons color={'gray'} size={30} name={'trash'} />
             </Pressable>
           </View>
