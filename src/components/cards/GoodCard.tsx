@@ -50,7 +50,7 @@ const GoodCard = ({
         <Pressable
           style={styles.buyButton}
           onPress={() => addToCart(goodData.id)}>
-          <Text style={styles.buyButtonTitle}>В КОРЗИНУ</Text>
+          <Ionicons color={'#4F8EF7'} size={30} name={'cart'} />
         </Pressable>
       )}
     </View>
@@ -59,19 +59,25 @@ const GoodCard = ({
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     width: 180,
+    height: 300,
     justifyContent: 'space-between',
     alignItems: 'center',
+    margin: 5,
+    alignSelf: 'flex-end',
     padding: 5,
     rowGap: 5,
     borderRadius: 20,
     backgroundColor: '#fff',
+    borderWidth: 2,
+    borderColor: '#eee',
   },
   image: {
     objectFit: 'contain',
   },
   title: {
-    color: 'gray',
+    color: '#444',
     fontSize: 12,
   },
   price: {
@@ -95,7 +101,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
-    backgroundColor: '#4F8EF799',
+    backgroundColor: '#4F8EF7',
   },
   buyButton: {
     width: '100%',
@@ -103,10 +109,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
-    backgroundColor: '#4F8EF7',
-  },
-  buyButtonTitle: {
-    color: 'white',
+    backgroundColor: '#4F8EF722',
   },
 });
 
