@@ -1,8 +1,10 @@
-import {ActivityIndicator, FlatList, StyleSheet} from 'react-native';
+import {ActivityIndicator, StyleSheet, View} from 'react-native';
+import {FlashList} from '@shopify/flash-list';
 import GoodCard from 'components/cards/GoodCard';
 import {useGoodsInfiniteQuery} from 'queries/goodQuery';
 import {useCartStore} from 'store/cartStore';
 import {useGoodMenuStore} from 'store/goodMenuStore';
+import {GoodData} from 'types/good';
 
 const GoodList = () => {
   const selectedAnimal = useGoodMenuStore(state => state.selectedAnimal);
@@ -15,11 +17,21 @@ const GoodList = () => {
   const {data, isSuccess, hasNextPage, isFetchingNextPage, fetchNextPage} =
     useGoodsInfiniteQuery(selectedAnimal, selectedGroup);
 
+  const renderItem = ({item}: {item: GoodData}) => (
+    <GoodCard
+      goodData={item}
+      cartCount={cart.get(item.id)}
+      addToCart={addToCart}
+      increaseInCart={increaseInCart}
+      decreaseInCart={decreaseInCart}
+    />
+  );
+
   return (
-    <>
+    <View style={styles.container}>
       {isSuccess && (
-        <FlatList
-          data={data?.pages.map(page => page.results).flat()}
+        <FlashList
+          data={data.pages.map(page => page.results).flat()}
           keyExtractor={item => item.id.toString()}
           numColumns={2}
           onEndReachedThreshold={2}
@@ -30,29 +42,20 @@ const GoodList = () => {
             <>{isFetchingNextPage && <ActivityIndicator size={50} />}</>
           }
           contentContainerStyle={styles.listContainer}
-          columnWrapperStyle={styles.listRow}
-          renderItem={({item}) => (
-            <GoodCard
-              goodData={item}
-              cartCount={cart.get(item.id)}
-              addToCart={addToCart}
-              increaseInCart={increaseInCart}
-              decreaseInCart={decreaseInCart}
-            />
-          )}
+          estimatedItemSize={300}
+          renderItem={renderItem}
         />
       )}
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  listRow: {
-    justifyContent: 'space-between',
+  container: {
+    height: '100%',
   },
   listContainer: {
-    gap: 10,
-    padding: 10,
+    padding: 5,
   },
 });
 
