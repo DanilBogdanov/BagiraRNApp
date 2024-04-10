@@ -21,6 +21,7 @@ const GoodMenuList = () => {
       <FlatList
         data={items}
         keyExtractor={item => item.id.toString()}
+        fadingEdgeLength={20}
         renderItem={({item}) => {
           const isExpanded = expanded.includes(item.id);
 
