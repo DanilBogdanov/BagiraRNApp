@@ -1,3 +1,4 @@
+import {useEffect, useRef} from 'react';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import {FlashList} from '@shopify/flash-list';
 import GoodCard from 'components/cards/GoodCard';
@@ -7,12 +8,17 @@ import {useGoodMenuStore} from 'store/goodMenuStore';
 import {GoodData} from 'types/good';
 
 const GoodList = () => {
+  const listRef = useRef<FlashList<GoodData> | null>(null);
   const selectedAnimal = useGoodMenuStore(state => state.selectedAnimal);
   const selectedGroup = useGoodMenuStore(state => state.selectedGroup);
   const cart = useCartStore(state => state.cart);
   const addToCart = useCartStore(state => state.add);
   const increaseInCart = useCartStore(state => state.increase);
   const decreaseInCart = useCartStore(state => state.decrease);
+
+  useEffect(() => {
+    listRef.current?.scrollToOffset({offset: 0});
+  }, [selectedAnimal, selectedGroup]);
 
   const {data, isSuccess, hasNextPage, isFetchingNextPage, fetchNextPage} =
     useGoodsInfiniteQuery(selectedAnimal, selectedGroup);
@@ -31,6 +37,7 @@ const GoodList = () => {
     <View style={styles.container}>
       {isSuccess && (
         <FlashList
+          ref={listRef}
           data={data.pages.map(page => page.results).flat()}
           keyExtractor={item => item.id.toString()}
           numColumns={2}

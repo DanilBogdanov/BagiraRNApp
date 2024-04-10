@@ -41,6 +41,5 @@ export const useGoodsInfiniteQuery = (animal: Animal, groupId: number | null) =>
         };
       }
     },
-    placeholderData: keepPreviousData,
     staleTime: STALE_TIME,
   });
