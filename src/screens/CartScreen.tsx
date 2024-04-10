@@ -46,6 +46,7 @@ const CartScreen = () => {
             data={goods}
             keyExtractor={item => item.id.toString()}
             contentContainerStyle={styles.row}
+            fadingEdgeLength={20}
             renderItem={({item: good}) => (
               <CartGoodCard
                 goodData={good}

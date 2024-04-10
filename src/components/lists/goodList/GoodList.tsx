@@ -49,6 +49,7 @@ const GoodList = () => {
             <>{isFetchingNextPage && <ActivityIndicator size={50} />}</>
           }
           contentContainerStyle={styles.listContainer}
+          fadingEdgeLength={20}
           estimatedItemSize={300}
           renderItem={renderItem}
         />
