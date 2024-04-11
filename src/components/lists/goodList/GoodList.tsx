@@ -10,7 +10,7 @@ import {GoodData} from 'types/good';
 const GoodList = () => {
   const listRef = useRef<FlashList<GoodData> | null>(null);
   const selectedAnimal = useGoodMenuStore(state => state.selectedAnimal);
-  const selectedGroup = useGoodMenuStore(state => state.selectedGroup);
+  const selectedGoodGroup = useGoodMenuStore(state => state.selectedGoodGroup);
   const cart = useCartStore(state => state.cart);
   const addToCart = useCartStore(state => state.add);
   const increaseInCart = useCartStore(state => state.increase);
@@ -18,10 +18,10 @@ const GoodList = () => {
 
   useEffect(() => {
     listRef.current?.scrollToOffset({offset: 0});
-  }, [selectedAnimal, selectedGroup]);
+  }, [selectedAnimal, selectedGoodGroup]);
 
   const {data, isSuccess, hasNextPage, isFetchingNextPage, fetchNextPage} =
-    useGoodsInfiniteQuery(selectedAnimal, selectedGroup);
+    useGoodsInfiniteQuery(selectedAnimal, selectedGoodGroup?.id ?? null);
 
   const renderItem = ({item}: {item: GoodData}) => (
     <GoodCard
