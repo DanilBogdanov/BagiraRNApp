@@ -1,14 +1,14 @@
 import {create} from 'zustand';
 import {immer} from 'zustand/middleware/immer';
-import {Animal} from 'types/goodMenu';
+import {Animal, GoodGroup} from 'types/goodMenu';
 
 type GoodMenuStore = {
   isDrawerOpened: boolean;
   setIsDrawerOpened: (opened: boolean) => void;
   selectedAnimal: Animal;
   setSelectedAnimal: (animal: Animal) => void;
-  selectedGroup: number | null;
-  setSelectedGroup: (id: number) => void;
+  selectedGoodGroup: GoodGroup | null;
+  setSelectedGoodGroup: (goodGroup: GoodGroup) => void;
   expanded: number[];
   setExpanded: (items: number[]) => void;
 };
@@ -24,13 +24,13 @@ export const useGoodMenuStore = create<GoodMenuStore>()(
     setSelectedAnimal: (animal: Animal) =>
       set(state => {
         state.selectedAnimal = animal;
-        state.selectedGroup = null;
+        state.selectedGoodGroup = null;
         state.expanded = [];
       }),
-    selectedGroup: null,
-    setSelectedGroup: (id: number) =>
+    selectedGoodGroup: null,
+    setSelectedGoodGroup: (goodGroup: GoodGroup) =>
       set(state => {
-        state.selectedGroup = id;
+        state.selectedGoodGroup = goodGroup;
         state.isDrawerOpened = false;
       }),
     expanded: [],

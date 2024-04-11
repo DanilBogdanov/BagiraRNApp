@@ -6,8 +6,10 @@ import {GoodMenuData} from 'types/goodMenu';
 
 const GoodMenuList = () => {
   const selectedAnimal = useGoodMenuStore(state => state.selectedAnimal);
-  const selectedGroup = useGoodMenuStore(state => state.selectedGroup);
-  const setSelectedGroup = useGoodMenuStore(state => state.setSelectedGroup);
+  const selectedGroup = useGoodMenuStore(state => state.selectedGoodGroup);
+  const setSelectedGroup = useGoodMenuStore(
+    state => state.setSelectedGoodGroup,
+  );
   const expanded = useGoodMenuStore(state => state.expanded);
   const setExpanded = useGoodMenuStore(state => state.setExpanded);
   const {
@@ -29,10 +31,12 @@ const GoodMenuList = () => {
             <View style={styles.menuItem}>
               <GoodMenuListItem
                 title={item.name}
-                isActive={item.id === selectedGroup}
+                isActive={item.id === selectedGroup?.id}
                 canExpand={!!item.children}
                 isExpanded={isExpanded}
-                onPressTitle={() => setSelectedGroup(item.id)}
+                onPressTitle={() =>
+                  setSelectedGroup({id: item.id, name: item.name})
+                }
                 onPressExpand={() =>
                   isExpanded
                     ? setExpanded(expanded.filter(value => value !== item.id))
