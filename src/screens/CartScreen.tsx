@@ -2,6 +2,7 @@ import {FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
 import CartGoodCard from 'components/cards/CartGoodCard';
 import {useCartStore} from 'store/cartStore';
 import {useGoodListQuery} from 'queries/goodQuery';
+import EmptyCart from 'components/placeholders/EmptyCart';
 
 const CartScreen = () => {
   const cart = useCartStore(state => state.cart);
@@ -39,38 +40,46 @@ const CartScreen = () => {
 
   return (
     <View style={styles.container}>
-      {isGoodsLoading && <Text style={styles.text}>Loading ...</Text>}
-      {(isPlaceholderData || isGoodsSuccess) && (
-        <>
-          <FlatList
-            data={goods}
-            keyExtractor={item => item.id.toString()}
-            contentContainerStyle={styles.row}
-            fadingEdgeLength={20}
-            renderItem={({item: good}) => (
-              <CartGoodCard
-                goodData={good}
-                cartCount={cart.get(good.id) ?? 0}
-                removeFromCart={removeFromCart}
-                increaseInCart={increaseInCart}
-                decreaseInCart={decreaseInCart}
+      {cart.size === 0 ? (
+        <EmptyCart />
+      ) : (
+        <View style={styles.cart}>
+          {isGoodsLoading && <Text style={styles.text}>Loading ...</Text>}
+          {(isPlaceholderData || isGoodsSuccess) && (
+            <>
+              <FlatList
+                data={goods}
+                keyExtractor={item => item.id.toString()}
+                contentContainerStyle={styles.row}
+                fadingEdgeLength={20}
+                renderItem={({item: good}) => (
+                  <CartGoodCard
+                    goodData={good}
+                    cartCount={cart.get(good.id) ?? 0}
+                    removeFromCart={removeFromCart}
+                    increaseInCart={increaseInCart}
+                    decreaseInCart={decreaseInCart}
+                  />
+                )}
               />
-            )}
-          />
-          <View style={styles.orderArea}>
-            <View style={styles.cartInfo}>
-              <Text style={styles.text}>
-                Позиций: <Text style={styles.infoText}>{getTotalCount()}</Text>
-              </Text>
-              <Text style={styles.text}>
-                Cумма: <Text style={styles.infoText}>{getTotalPrice()}₽</Text>
-              </Text>
-            </View>
-            <Pressable style={styles.orderButton}>
-              <Text style={styles.orderButtonTitle}>ЗАКАЗАТЬ</Text>
-            </Pressable>
-          </View>
-        </>
+              <View style={styles.orderArea}>
+                <View style={styles.cartInfo}>
+                  <Text style={styles.text}>
+                    Позиций:{' '}
+                    <Text style={styles.infoText}>{getTotalCount()}</Text>
+                  </Text>
+                  <Text style={styles.text}>
+                    Cумма:{' '}
+                    <Text style={styles.infoText}>{getTotalPrice()}₽</Text>
+                  </Text>
+                </View>
+                <Pressable style={styles.orderButton}>
+                  <Text style={styles.orderButtonTitle}>ЗАКАЗАТЬ</Text>
+                </Pressable>
+              </View>
+            </>
+          )}
+        </View>
       )}
     </View>
   );
@@ -78,6 +87,9 @@ const CartScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+  },
+  cart: {
     flex: 1,
     justifyContent: 'space-between',
   },
