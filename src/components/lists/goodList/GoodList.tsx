@@ -6,6 +6,9 @@ import {useGoodsInfiniteQuery} from 'queries/goodQuery';
 import {useCartStore} from 'store/cartStore';
 import {useGoodMenuStore} from 'store/goodMenuStore';
 import {GoodData} from 'types/good';
+import GoodListSkeleton from 'components/placeholders/GoodListSkeleton';
+
+const NUM_COLUMNS = 2;
 
 const GoodList = () => {
   const listRef = useRef<FlashList<GoodData> | null>(null);
@@ -20,8 +23,14 @@ const GoodList = () => {
     listRef.current?.scrollToOffset({offset: 0});
   }, [selectedAnimal, selectedGoodGroup]);
 
-  const {data, isSuccess, hasNextPage, isFetchingNextPage, fetchNextPage} =
-    useGoodsInfiniteQuery(selectedAnimal, selectedGoodGroup?.id ?? null);
+  const {
+    data,
+    isLoading,
+    isSuccess,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+  } = useGoodsInfiniteQuery(selectedAnimal, selectedGoodGroup?.id ?? null);
 
   const renderItem = ({item}: {item: GoodData}) => (
     <GoodCard
@@ -35,12 +44,13 @@ const GoodList = () => {
 
   return (
     <View style={styles.container}>
+      {isLoading && <GoodListSkeleton numColumns={NUM_COLUMNS} />}
       {isSuccess && (
         <FlashList
           ref={listRef}
           data={data.pages.map(page => page.results).flat()}
           keyExtractor={item => item.id.toString()}
-          numColumns={2}
+          numColumns={NUM_COLUMNS}
           onEndReachedThreshold={2}
           onEndReached={() => {
             hasNextPage && !isFetchingNextPage && fetchNextPage();

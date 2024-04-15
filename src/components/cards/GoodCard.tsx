@@ -70,8 +70,7 @@ const styles = StyleSheet.create({
     rowGap: 5,
     borderRadius: 20,
     backgroundColor: '#fff',
-    borderWidth: 2,
-    borderColor: '#eee',
+    elevation: 2,
   },
   image: {
     objectFit: 'contain',
