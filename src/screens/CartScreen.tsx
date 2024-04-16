@@ -3,6 +3,7 @@ import CartGoodCard from 'components/cards/CartGoodCard';
 import {useCartStore} from 'store/cartStore';
 import {useGoodListQuery} from 'queries/goodQuery';
 import EmptyCart from 'components/placeholders/EmptyCart';
+import CartSkeleton from 'components/placeholders/CartSkeleton';
 
 const CartScreen = () => {
   const cart = useCartStore(state => state.cart);
@@ -44,7 +45,7 @@ const CartScreen = () => {
         <EmptyCart />
       ) : (
         <View style={styles.cart}>
-          {isGoodsLoading && <Text style={styles.text}>Loading ...</Text>}
+          {isGoodsLoading && <CartSkeleton />}
           {(isPlaceholderData || isGoodsSuccess) && (
             <>
               <FlatList
