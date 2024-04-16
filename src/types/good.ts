@@ -4,6 +4,7 @@ export interface GoodData {
   description: string | null;
   imgUrl: string;
   price: number;
+  rest?: number;
 }
 
 export interface GoodResponse {
@@ -14,7 +15,7 @@ export interface GoodResponse {
 }
 
 export interface GoodRequest {
-  groupId?: number;
+  groupId: number | null;
   take?: number;
   skip?: number;
 }

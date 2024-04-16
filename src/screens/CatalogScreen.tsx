@@ -1,12 +1,13 @@
-import {useState} from 'react';
 import {Pressable, StyleSheet, View} from 'react-native';
 import {Drawer} from 'react-native-drawer-layout';
-import GoodMenu from 'components/menu/goodMenu/GoodMenu';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import GoodMenu from 'components/menu/goodMenu/GoodMenu';
 import GoodList from 'components/lists/goodList/GoodList';
+import {useGoodMenuStore} from 'store/goodMenuStore';
 
 const CatalogScreen = () => {
-  const [isDrawerOpened, setIsDrawerOpened] = useState(false);
+  const isDrawerOpened = useGoodMenuStore(state => state.isDrawerOpened);
+  const setIsDrawerOpened = useGoodMenuStore(state => state.setIsDrawerOpened);
 
   return (
     <Drawer

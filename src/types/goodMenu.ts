@@ -6,8 +6,13 @@ export interface GoodMenuData {
 }
 
 export enum Animal {
-  All = 'All',
-  Cats = 'Cats',
-  Dogs = 'Dogs',
-  Others = 'Others',
+  All = 'Все',
+  Cats = 'Кошки',
+  Dogs = 'Собаки',
+  Others = 'Другие',
+}
+
+export interface GoodGroup {
+  id: number;
+  name: string;
 }

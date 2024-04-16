@@ -1,4 +1,5 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import CatalogHeader from 'components/headers/CatalogHeader';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {HomeScreen, CatalogScreen, ProfileScreen, CartScreen} from 'screens';
 import {useCartStore} from 'store/cartStore';
@@ -24,12 +25,15 @@ const TabNavigator = () => {
     />
   );
 
+  const catalogHeader = () => <CatalogHeader />;
+
   return (
     <Tab.Navigator>
       <Tab.Screen
         name={Screens.Home}
         component={HomeScreen}
         options={{
+          title: 'Главная',
           tabBarIcon: prop => icon({name: 'home', ...prop}),
         }}
       />
@@ -37,6 +41,8 @@ const TabNavigator = () => {
         name={Screens.Catalog}
         component={CatalogScreen}
         options={{
+          title: 'Каталог',
+          headerTitle: catalogHeader,
           tabBarIcon: prop => icon({name: 'storefront', ...prop}),
         }}
       />
@@ -44,6 +50,7 @@ const TabNavigator = () => {
         name={Screens.Profile}
         component={ProfileScreen}
         options={{
+          title: 'Профиль',
           tabBarIcon: prop => icon({name: 'person', ...prop}),
         }}
       />
@@ -51,7 +58,12 @@ const TabNavigator = () => {
         name={Screens.Cart}
         component={CartScreen}
         options={{
-          tabBarBadge: cart.size,
+          unmountOnBlur: true,
+          title: 'Корзина',
+          tabBarBadge: Array.from(cart.values()).reduce(
+            (acc, curr) => acc + curr,
+            0,
+          ),
           tabBarIcon: prop => icon({name: 'cart', ...prop}),
         }}
       />

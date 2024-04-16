@@ -1,57 +1,79 @@
-import {FlatList, StyleSheet} from 'react-native';
+import {useEffect, useRef} from 'react';
+import {ActivityIndicator, StyleSheet, View} from 'react-native';
+import {FlashList} from '@shopify/flash-list';
 import GoodCard from 'components/cards/GoodCard';
-import {useGoodsQuery} from 'queries/goodQuery';
+import {useGoodsInfiniteQuery} from 'queries/goodQuery';
 import {useCartStore} from 'store/cartStore';
 import {useGoodMenuStore} from 'store/goodMenuStore';
+import {GoodData} from 'types/good';
+import GoodListSkeleton from 'components/placeholders/GoodListSkeleton';
+
+const NUM_COLUMNS = 2;
 
 const GoodList = () => {
+  const listRef = useRef<FlashList<GoodData> | null>(null);
   const selectedAnimal = useGoodMenuStore(state => state.selectedAnimal);
-  const selectedGroup = useGoodMenuStore(state => state.selectedGroup);
+  const selectedGoodGroup = useGoodMenuStore(state => state.selectedGoodGroup);
   const cart = useCartStore(state => state.cart);
   const addToCart = useCartStore(state => state.add);
   const increaseInCart = useCartStore(state => state.increase);
   const decreaseInCart = useCartStore(state => state.decrease);
 
-  const getRequest = () => {
-    if (selectedGroup === null) {
-      return {};
-    }
+  useEffect(() => {
+    listRef.current?.scrollToOffset({offset: 0});
+  }, [selectedAnimal, selectedGoodGroup]);
 
-    return {groupId: selectedGroup};
-  };
+  const {
+    data,
+    isLoading,
+    isSuccess,
+    hasNextPage,
+    isFetchingNextPage,
+    fetchNextPage,
+  } = useGoodsInfiniteQuery(selectedAnimal, selectedGoodGroup?.id ?? null);
 
-  const {data: goodResponse, isSuccess: isGoodsSuccess} = useGoodsQuery(
-    selectedAnimal,
-    getRequest(),
+  const renderItem = ({item}: {item: GoodData}) => (
+    <GoodCard
+      goodData={item}
+      cartCount={cart.get(item.id)}
+      addToCart={addToCart}
+      increaseInCart={increaseInCart}
+      decreaseInCart={decreaseInCart}
+    />
   );
 
   return (
-    <>
-      {isGoodsSuccess && (
-        <FlatList
-          data={goodResponse.results}
+    <View style={styles.container}>
+      {isLoading && <GoodListSkeleton numColumns={NUM_COLUMNS} />}
+      {isSuccess && (
+        <FlashList
+          ref={listRef}
+          data={data.pages.map(page => page.results).flat()}
           keyExtractor={item => item.id.toString()}
-          renderItem={({item}) => (
-            <GoodCard
-              goodData={item}
-              cartCount={cart.get(item.id)}
-              addToCart={addToCart}
-              increaseInCart={increaseInCart}
-              decreaseInCart={decreaseInCart}
-            />
-          )}
-          numColumns={2}
-          columnWrapperStyle={styles.listRow}
+          numColumns={NUM_COLUMNS}
+          onEndReachedThreshold={2}
+          onEndReached={() => {
+            hasNextPage && !isFetchingNextPage && fetchNextPage();
+          }}
+          ListFooterComponent={
+            <>{isFetchingNextPage && <ActivityIndicator size={50} />}</>
+          }
+          contentContainerStyle={styles.listContainer}
+          fadingEdgeLength={20}
+          estimatedItemSize={300}
+          renderItem={renderItem}
         />
       )}
-    </>
+    </View>
   );
 };
 
 const styles = StyleSheet.create({
-  listRow: {
-    justifyContent: 'space-around',
-    marginTop: 10,
+  container: {
+    height: '100%',
+  },
+  listContainer: {
+    padding: 5,
   },
 });
 
