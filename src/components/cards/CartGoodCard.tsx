@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 10,
     borderRadius: 20,
+    elevation: 1,
   },
   content: {
     flex: 1,
