@@ -1,11 +1,19 @@
 import {FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
 import CartGoodCard from 'components/cards/CartGoodCard';
-import {useCartStore} from 'store/cartStore';
-import {useGoodListQuery} from 'queries/goodQuery';
 import EmptyCart from 'components/placeholders/EmptyCart';
 import CartSkeleton from 'components/placeholders/CartSkeleton';
+import {useCartStore} from 'store/cartStore';
+import {useGoodListQuery} from 'queries/goodQuery';
+import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
+import {TabNavigatorParamList} from 'navigation/TabNavigator';
+import {Screens} from 'types/Screens';
 
-const CartScreen = () => {
+type CartScreenProps = BottomTabScreenProps<
+  TabNavigatorParamList,
+  Screens.Cart
+>;
+
+const CartScreen = ({navigation}: CartScreenProps) => {
   const cart = useCartStore(state => state.cart);
   const increaseInCart = useCartStore(state => state.increase);
   const decreaseInCart = useCartStore(state => state.decrease);
@@ -42,7 +50,7 @@ const CartScreen = () => {
   return (
     <View style={styles.container}>
       {cart.size === 0 ? (
-        <EmptyCart />
+        <EmptyCart onPress={() => navigation.navigate(Screens.Catalog)} />
       ) : (
         <View style={styles.cart}>
           {isGoodsLoading && <CartSkeleton />}
