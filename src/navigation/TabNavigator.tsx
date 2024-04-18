@@ -12,20 +12,25 @@ type IconProps = {
   color: string;
 };
 
-const Tab = createBottomTabNavigator();
+const icon = ({name, focused, size, color}: IconProps) => (
+  <Ionicons
+    name={focused ? name : `${name}-outline`}
+    size={size}
+    color={color}
+  />
+);
+
+export type TabNavigatorParamList = {
+  [Screens.Home]: undefined;
+  [Screens.Catalog]: undefined;
+  [Screens.Profile]: undefined;
+  [Screens.Cart]: undefined;
+};
+
+const Tab = createBottomTabNavigator<TabNavigatorParamList>();
 
 const TabNavigator = () => {
   const cart = useCartStore(state => state.cart);
-
-  const icon = ({name, focused, size, color}: IconProps) => (
-    <Ionicons
-      name={focused ? name : `${name}-outline`}
-      size={size}
-      color={color}
-    />
-  );
-
-  const catalogHeader = () => <CatalogHeader />;
 
   return (
     <Tab.Navigator>
@@ -42,7 +47,7 @@ const TabNavigator = () => {
         component={CatalogScreen}
         options={{
           title: 'Каталог',
-          headerTitle: catalogHeader,
+          headerTitle: CatalogHeader,
           tabBarIcon: prop => icon({name: 'storefront', ...prop}),
         }}
       />

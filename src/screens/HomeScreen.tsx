@@ -1,6 +1,9 @@
-import AnimalIcon from 'components/menu/goodMenu/animalBar/AnimalIcon';
 import {Image, StyleSheet, View} from 'react-native';
+import {TabNavigatorParamList} from 'navigation/TabNavigator';
+import AnimalIcon from 'components/menu/goodMenu/animalBar/AnimalIcon';
 import {useGoodMenuStore} from 'store/goodMenuStore';
+import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
+import {Screens} from 'types/Screens';
 import {Animal} from 'types/goodMenu';
 
 const icons = [
@@ -10,7 +13,12 @@ const icons = [
   {name: 'bird', animal: Animal.Others, title: 'Другие'},
 ];
 
-const HomeScreen = () => {
+type HomeScreenProps = BottomTabScreenProps<
+  TabNavigatorParamList,
+  Screens.Home
+>;
+
+const HomeScreen = ({navigation}: HomeScreenProps) => {
   const setSelectedAnimal = useGoodMenuStore(state => state.setSelectedAnimal);
   const setIsDrawerOpened = useGoodMenuStore(state => state.setIsDrawerOpened);
 
@@ -27,6 +35,7 @@ const HomeScreen = () => {
             onPress={() => {
               setSelectedAnimal(item.animal);
               setIsDrawerOpened(true);
+              navigation.navigate(Screens.Catalog);
             }}
           />
         ))}
