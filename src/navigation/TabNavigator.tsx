@@ -1,5 +1,6 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import CatalogHeader from 'components/headers/CatalogHeader';
+import HomeHeader from 'components/headers/HomeHeader';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {HomeScreen, CatalogScreen, ProfileScreen, CartScreen} from 'screens';
 import {useCartStore} from 'store/cartStore';
@@ -39,6 +40,7 @@ const TabNavigator = () => {
         component={HomeScreen}
         options={{
           title: 'Главная',
+          headerTitle: HomeHeader,
           tabBarIcon: prop => icon({name: 'home', ...prop}),
         }}
       />
