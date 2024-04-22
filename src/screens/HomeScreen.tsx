@@ -5,7 +5,7 @@ import {useGoodMenuStore} from 'store/goodMenuStore';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {Screens} from 'types/Screens';
 import {Animal} from 'types/goodMenu';
-import {COLORS} from 'constants/theme';
+import {ASSETS, COLORS} from 'constants/theme';
 
 const icons = [
   {name: 'paw', animal: Animal.All, title: 'Все'},
@@ -25,7 +25,7 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
 
   return (
     <View style={styles.container}>
-      <Image style={styles.img} source={require('assets/img/bagira.jpg')} />
+      <Image style={styles.img} source={ASSETS.bagira} />
       <View style={styles.row}>
         {icons.map(item => (
           <AnimalIcon
