@@ -1,5 +1,5 @@
 import {Button, Image, StyleSheet, Text, View} from 'react-native';
-import {COLORS} from 'constants/theme';
+import {ASSETS, COLORS} from 'constants/theme';
 
 type EmptyCartProps = {
   onPress: () => void;
@@ -8,7 +8,7 @@ type EmptyCartProps = {
 const EmptyCart = ({onPress}: EmptyCartProps) => {
   return (
     <View style={styles.container}>
-      <Image style={styles.img} source={require('assets/img/emptyCart.png')} />
+      <Image style={styles.img} source={ASSETS.emptyCart} />
       <Text style={styles.title}>Ваша корзина пуста 😥</Text>
       <Button color={COLORS.primary} title="В каталог" onPress={onPress} />
     </View>

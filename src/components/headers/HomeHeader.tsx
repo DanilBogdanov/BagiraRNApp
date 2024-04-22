@@ -1,16 +1,13 @@
 import {Image, Linking, Pressable, StyleSheet, Text, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {PHONE_NUMBER} from 'constants/general';
-import {COLORS} from 'constants/theme';
+import {ASSETS, COLORS} from 'constants/theme';
 
 const HomeHeader = () => {
   return (
     <View style={styles.container}>
       <View style={styles.logo}>
-        <Image
-          style={styles.img}
-          source={require('assets/img/bagira-logo.jpg')}
-        />
+        <Image style={styles.img} source={ASSETS.bagiraLogo} />
         <Text style={styles.title}>Багира</Text>
       </View>
       <Pressable
