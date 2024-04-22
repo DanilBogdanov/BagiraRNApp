@@ -2,6 +2,7 @@ import {StyleSheet, View} from 'react-native';
 import AnimalIcon from './AnimalIcon';
 import {useGoodMenuStore} from 'store/goodMenuStore';
 import {Animal} from 'types/goodMenu';
+import {COLORS} from 'constants/theme';
 
 const icons = [
   {name: 'paw', animal: Animal.All, title: 'Все'},
@@ -34,7 +35,7 @@ const styles = StyleSheet.create({
     paddingVertical: 5,
     flexDirection: 'row',
     justifyContent: 'space-around',
-    borderBottomColor: '#eee',
+    borderBottomColor: COLORS.secondaryLight,
     borderBottomWidth: 1,
   },
 });

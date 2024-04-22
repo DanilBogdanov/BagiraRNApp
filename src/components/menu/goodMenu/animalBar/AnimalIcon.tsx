@@ -1,5 +1,6 @@
 import {Pressable, Text, StyleSheet} from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import {COLORS} from 'constants/theme';
 
 type AnimalIconProps = {
   name: string;
@@ -16,7 +17,7 @@ const AnimalIcon = ({name, title, active, onPress}: AnimalIconProps) => {
       <MaterialCommunityIcons
         name={name}
         size={30}
-        color={active ? '#4F8EF7' : '#c9c9c9'}
+        color={active ? COLORS.primary : COLORS.secondary}
       />
       <Text style={[styles.text, active && styles.active]}>{title}</Text>
     </Pressable>
@@ -30,8 +31,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 10,
   },
-  text: {color: '#c9c9c9'},
-  active: {color: '#4F8EF7', backgroundColor: '#f0f6ff'},
+  text: {color: COLORS.secondary},
+  active: {color: COLORS.primary, backgroundColor: COLORS.primaryLight},
 });
 
 export default AnimalIcon;

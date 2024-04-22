@@ -2,6 +2,7 @@ import {memo} from 'react';
 import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {GoodData} from 'types/good';
+import {COLORS} from 'constants/theme';
 
 const BASE_URL = 'https://danildev.net/';
 
@@ -37,20 +38,20 @@ const GoodCard = ({
           <Pressable
             style={styles.countButton}
             onPress={() => decreaseInCart(goodData.id)}>
-            <Ionicons color={'#fff'} size={30} name={'remove'} />
+            <Ionicons color={COLORS.white} size={30} name={'remove'} />
           </Pressable>
           <Text style={styles.cartCount}>{cartCount}</Text>
           <Pressable
             style={styles.countButton}
             onPress={() => increaseInCart(goodData.id)}>
-            <Ionicons color={'#fff'} size={30} name={'add'} />
+            <Ionicons color={COLORS.white} size={30} name={'add'} />
           </Pressable>
         </View>
       ) : (
         <Pressable
           style={styles.buyButton}
           onPress={() => addToCart(goodData.id)}>
-          <Ionicons color={'#4F8EF7'} size={30} name={'cart'} />
+          <Ionicons color={COLORS.primary} size={30} name={'cart'} />
         </Pressable>
       )}
     </View>
@@ -69,18 +70,18 @@ const styles = StyleSheet.create({
     padding: 5,
     rowGap: 5,
     borderRadius: 20,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.white,
     elevation: 2,
   },
   image: {
     objectFit: 'contain',
   },
   title: {
-    color: '#444',
+    color: COLORS.text,
     fontSize: 12,
   },
   price: {
-    color: 'rgb(99, 140, 71)',
+    color: COLORS.green,
     fontSize: 20,
     fontWeight: 'bold',
   },
@@ -91,7 +92,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   cartCount: {
-    color: 'gray',
+    color: COLORS.secondary,
     fontSize: 16,
   },
   countButton: {
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
-    backgroundColor: '#4F8EF7',
+    backgroundColor: COLORS.primary,
   },
   buyButton: {
     width: '100%',
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 20,
-    backgroundColor: '#4F8EF722',
+    backgroundColor: COLORS.primaryLight,
   },
 });
 

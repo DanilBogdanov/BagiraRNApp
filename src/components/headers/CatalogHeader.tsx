@@ -1,5 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import {useGoodMenuStore} from 'store/goodMenuStore';
+import {COLORS} from 'constants/theme';
 
 const CatalogHeader = () => {
   const selectedAnimal = useGoodMenuStore(state => state.selectedAnimal);
@@ -25,12 +26,12 @@ const styles = StyleSheet.create({
   animalTitle: {
     fontSize: 20,
     fontWeight: '600',
-    color: '#000',
+    color: COLORS.black,
   },
   groupTitle: {
     fontSize: 16,
     fontWeight: '600',
-    color: '#000',
+    color: COLORS.black,
   },
 });
 

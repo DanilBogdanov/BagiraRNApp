@@ -2,6 +2,7 @@ import {memo} from 'react';
 import {Alert, Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {GoodData} from 'types/good';
+import {COLORS} from 'constants/theme';
 
 const BASE_URL = 'https://danildev.net/';
 
@@ -62,17 +63,17 @@ const CartGoodCard = ({
           <View style={styles.actions}>
             <View style={styles.cartArea}>
               <Pressable style={styles.countButton} onPress={onDecreaseInCart}>
-                <Ionicons color={'#fff'} size={30} name={'remove'} />
+                <Ionicons color={COLORS.white} size={30} name={'remove'} />
               </Pressable>
               <Text style={styles.cartCount}>{cartCount}</Text>
               <Pressable
                 style={styles.countButton}
                 onPress={() => increaseInCart(goodData.id)}>
-                <Ionicons color={'#fff'} size={30} name={'add'} />
+                <Ionicons color={COLORS.white} size={30} name={'add'} />
               </Pressable>
             </View>
             <Pressable onPress={onRemoveFromCart}>
-              <Ionicons color={'gray'} size={30} name={'trash'} />
+              <Ionicons color={COLORS.secondary} size={30} name={'trash'} />
             </Pressable>
           </View>
         </View>
@@ -86,7 +87,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     columnGap: 10,
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: COLORS.white,
     padding: 10,
     borderRadius: 20,
     elevation: 1,
@@ -100,7 +101,7 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 14,
-    color: '#444',
+    color: COLORS.text,
   },
   actions: {
     flexDirection: 'row',
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
   cartCount: {
     minWidth: 40,
     textAlign: 'center',
-    color: 'gray',
+    color: COLORS.secondary,
     fontSize: 16,
   },
   countButton: {
@@ -124,7 +125,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    backgroundColor: '#4F8EF7',
+    backgroundColor: COLORS.primary,
   },
   priceArea: {
     flexDirection: 'row',
@@ -132,11 +133,11 @@ const styles = StyleSheet.create({
   },
   price: {
     marginLeft: 30,
-    color: 'gray',
+    color: COLORS.secondary,
     fontSize: 18,
   },
   priceCount: {
-    color: 'rgb(99, 140, 71)',
+    color: COLORS.green,
     fontSize: 20,
     fontWeight: 'bold',
   },

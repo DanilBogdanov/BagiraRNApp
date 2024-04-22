@@ -1,6 +1,7 @@
 import {memo} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Skeleton from './Skeleton';
+import {COLORS} from 'constants/theme';
 
 const GoodCardSkeleton = () => {
   return (
@@ -25,7 +26,7 @@ const styles = StyleSheet.create({
     padding: 5,
     rowGap: 5,
     borderRadius: 20,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.white,
     elevation: 2,
   },
 });

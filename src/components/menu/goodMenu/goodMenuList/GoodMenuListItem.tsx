@@ -1,5 +1,6 @@
 import {View, Text, Pressable, StyleSheet} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {COLORS} from 'constants/theme';
 
 type GoodMenuListItemProps = {
   title: string;
@@ -29,7 +30,7 @@ const GoodMenuListItem = ({
         <Pressable onPress={onPressExpand}>
           <View style={[styles.expandedButton, isExpanded && styles.expanded]}>
             <Ionicons
-              color={isExpanded ? '#4F8EF7' : '#c9c9c9'}
+              color={isExpanded ? COLORS.primary : COLORS.secondary}
               size={20}
               name={isExpanded ? 'chevron-up' : 'chevron-down'}
             />
@@ -52,11 +53,11 @@ const styles = StyleSheet.create({
   text: {
     padding: 5,
     fontSize: 17,
-    color: '#999',
+    color: COLORS.secondary,
   },
   active: {
-    color: '#4F8EF7',
-    backgroundColor: '#f0f6ff',
+    color: COLORS.primary,
+    backgroundColor: COLORS.primaryLight,
     borderRadius: 10,
   },
   expandedButton: {
@@ -64,12 +65,12 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgb(240, 240, 240)',
+    backgroundColor: COLORS.secondaryLight,
     alignSelf: 'center',
     borderRadius: 10,
   },
   expanded: {
-    backgroundColor: '#f0f6ff',
+    backgroundColor: COLORS.primaryLight,
   },
 });
 
