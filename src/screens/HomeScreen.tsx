@@ -5,6 +5,7 @@ import {useGoodMenuStore} from 'store/goodMenuStore';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {Screens} from 'types/Screens';
 import {Animal} from 'types/goodMenu';
+import {COLORS} from 'constants/theme';
 
 const icons = [
   {name: 'paw', animal: Animal.All, title: 'Все'},
@@ -48,7 +49,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 10,
-    backgroundColor: '#fff',
+    backgroundColor: COLORS.white,
   },
   img: {
     width: '100%',
@@ -57,9 +58,6 @@ const styles = StyleSheet.create({
   },
   row: {
     gap: 10,
-  },
-  text: {
-    color: 'black',
   },
 });
 

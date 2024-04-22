@@ -3,6 +3,7 @@ import GoodMenuListItem from './GoodMenuListItem';
 import {useGoodMenuStore} from 'store/goodMenuStore';
 import {useGoodMenuQuery} from 'queries/goodMenuQuery';
 import {GoodMenuData} from 'types/goodMenu';
+import {COLORS} from 'constants/theme';
 
 const GoodMenuList = () => {
   const selectedAnimal = useGoodMenuStore(state => state.selectedAnimal);
@@ -65,12 +66,8 @@ const styles = StyleSheet.create({
   menuItem: {
     paddingLeft: 10,
     paddingBottom: 3,
-    borderLeftWidth: 1,
-    borderLeftColor: '#c9c9c9',
-  },
-  text: {
-    fontSize: 16,
-    color: '#c9c9c9',
+    borderLeftWidth: 0.5,
+    borderLeftColor: COLORS.secondary,
   },
 });
 

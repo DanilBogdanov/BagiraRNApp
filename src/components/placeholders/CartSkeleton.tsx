@@ -1,6 +1,7 @@
 import {StyleSheet, View} from 'react-native';
 import CartGoodCardSkeleton from './CartGoodCardSkeleton';
 import Skeleton from './Skeleton';
+import {COLORS} from 'constants/theme';
 
 const CartSkeleton = () => {
   return (
@@ -31,9 +32,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: COLORS.white,
     borderTopWidth: 1,
-    borderColor: '#ddd',
+    borderColor: COLORS.secondaryLight,
   },
 });
 

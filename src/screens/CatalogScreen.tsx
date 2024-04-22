@@ -4,6 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import GoodMenu from 'components/menu/goodMenu/GoodMenu';
 import GoodList from 'components/lists/goodList/GoodList';
 import {useGoodMenuStore} from 'store/goodMenuStore';
+import {COLORS} from 'constants/theme';
 
 const CatalogScreen = () => {
   const isDrawerOpened = useGoodMenuStore(state => state.isDrawerOpened);
@@ -22,7 +23,7 @@ const CatalogScreen = () => {
           style={styles.listButtonContainer}
           onPress={() => setIsDrawerOpened(true)}>
           <View style={styles.listButton}>
-            <Ionicons color={'#fff'} size={30} name={'list-outline'} />
+            <Ionicons color={COLORS.white} size={30} name={'list-outline'} />
           </View>
         </Pressable>
         <GoodList />
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
     padding: 7,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'red',
+    backgroundColor: COLORS.red,
     borderRadius: 10,
     elevation: 10,
     opacity: 15,

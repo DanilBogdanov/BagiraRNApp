@@ -1,4 +1,5 @@
 import {Button, Image, StyleSheet, Text, View} from 'react-native';
+import {COLORS} from 'constants/theme';
 
 type EmptyCartProps = {
   onPress: () => void;
@@ -9,7 +10,7 @@ const EmptyCart = ({onPress}: EmptyCartProps) => {
     <View style={styles.container}>
       <Image style={styles.img} source={require('assets/img/emptyCart.png')} />
       <Text style={styles.title}>Ваша корзина пуста 😥</Text>
-      <Button color={'#4F8EF7'} title="В каталог" onPress={onPress} />
+      <Button color={COLORS.primary} title="В каталог" onPress={onPress} />
     </View>
   );
 };
@@ -27,7 +28,7 @@ const styles = StyleSheet.create({
     objectFit: 'contain',
   },
   title: {
-    color: '#444',
+    color: COLORS.text,
     fontSize: 28,
     fontWeight: 'bold',
   },

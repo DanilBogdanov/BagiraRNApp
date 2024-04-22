@@ -1,5 +1,6 @@
 import {StyleSheet, View} from 'react-native';
 import Skeleton from './Skeleton';
+import {COLORS} from 'constants/theme';
 
 const CartGoodCardSkeleton = () => {
   return (
@@ -21,7 +22,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     columnGap: 10,
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: COLORS.white,
     padding: 10,
     borderRadius: 20,
     elevation: 1,

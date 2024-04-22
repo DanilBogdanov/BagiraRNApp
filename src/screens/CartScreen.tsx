@@ -7,6 +7,7 @@ import {useGoodListQuery} from 'queries/goodQuery';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {TabNavigatorParamList} from 'navigation/TabNavigator';
 import {Screens} from 'types/Screens';
+import {COLORS} from 'constants/theme';
 
 type CartScreenProps = BottomTabScreenProps<
   TabNavigatorParamList,
@@ -108,20 +109,20 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 16,
-    color: '#777',
+    color: COLORS.secondary,
   },
   infoText: {
     fontSize: 20,
-    color: '#555',
+    color: COLORS.text,
     fontWeight: '700',
   },
   orderArea: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: COLORS.white,
     borderTopWidth: 1,
-    borderColor: '#ddd',
+    borderColor: COLORS.secondaryLight,
   },
   cartInfo: {
     paddingLeft: 10,
@@ -132,12 +133,12 @@ const styles = StyleSheet.create({
     margin: 10,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#4F8EF7',
+    backgroundColor: COLORS.primary,
     borderRadius: 10,
   },
   orderButtonTitle: {
     fontSize: 18,
-    color: 'white',
+    color: COLORS.white,
   },
 });
 

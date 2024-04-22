@@ -1,4 +1,5 @@
 import {StyleSheet, View, ViewStyle} from 'react-native';
+import {COLORS} from 'constants/theme';
 
 type SkeletonProps = {
   width: ViewStyle['width'];
@@ -14,7 +15,7 @@ const Skeleton = ({width, height, radius = 10}: SkeletonProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#eee',
+    backgroundColor: COLORS.secondaryLight,
   },
 });
 
