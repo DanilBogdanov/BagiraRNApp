@@ -4,7 +4,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import GoodMenu from 'components/menu/goodMenu/GoodMenu';
 import GoodList from 'components/lists/goodList/GoodList';
 import {useGoodMenuStore} from 'store/goodMenuStore';
-import {COLORS} from 'constants/theme';
+import {COLORS, SIZES} from 'constants/theme';
 
 const CatalogScreen = () => {
   const isDrawerOpened = useGoodMenuStore(state => state.isDrawerOpened);
@@ -35,18 +35,16 @@ const CatalogScreen = () => {
 const styles = StyleSheet.create({
   listButtonContainer: {
     position: 'absolute',
-    left: 20,
-    top: 20,
+    left: SIZES.sm,
+    top: SIZES.sm,
     zIndex: 10,
   },
   listButton: {
-    padding: 7,
+    padding: SIZES.s,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: COLORS.red,
-    borderRadius: 10,
-    elevation: 10,
-    opacity: 15,
+    borderRadius: SIZES.s,
   },
 });
 

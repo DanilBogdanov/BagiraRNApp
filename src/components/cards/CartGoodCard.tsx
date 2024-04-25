@@ -2,7 +2,7 @@ import {memo} from 'react';
 import {Alert, Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {GoodData} from 'types/good';
-import {COLORS} from 'constants/theme';
+import {COLORS, SIZES} from 'constants/theme';
 
 const BASE_URL = 'https://danildev.net/';
 
@@ -54,27 +54,39 @@ const CartGoodCard = ({
         />
         <View style={styles.content}>
           <Text style={styles.title}>{goodData.name}</Text>
-          <View style={styles.priceArea}>
-            <Text style={styles.price}>{goodData.price}₽</Text>
-            <Text style={styles.priceCount}>
-              {goodData.price * (cartCount ?? 0)}₽
-            </Text>
-          </View>
           <View style={styles.actions}>
-            <View style={styles.cartArea}>
-              <Pressable style={styles.countButton} onPress={onDecreaseInCart}>
-                <Ionicons color={COLORS.white} size={30} name={'remove'} />
-              </Pressable>
-              <Text style={styles.cartCount}>{cartCount}</Text>
-              <Pressable
-                style={styles.countButton}
-                onPress={() => increaseInCart(goodData.id)}>
-                <Ionicons color={COLORS.white} size={30} name={'add'} />
+            <View style={styles.col}>
+              <Text style={styles.price}>{goodData.price}₽</Text>
+              <View style={styles.cartArea}>
+                <Pressable
+                  style={styles.countButton}
+                  onPress={onDecreaseInCart}>
+                  <Ionicons
+                    color={COLORS.white}
+                    size={SIZES.md}
+                    name={'remove'}
+                  />
+                </Pressable>
+                <Text style={styles.cartCount}>{cartCount}</Text>
+                <Pressable
+                  style={styles.countButton}
+                  onPress={() => increaseInCart(goodData.id)}>
+                  <Ionicons color={COLORS.white} size={SIZES.md} name={'add'} />
+                </Pressable>
+              </View>
+            </View>
+            <View style={styles.col}>
+              <Text style={styles.priceCount}>
+                {goodData.price * (cartCount ?? 0)}₽
+              </Text>
+              <Pressable style={styles.deleteBtn} onPress={onRemoveFromCart}>
+                <Ionicons
+                  color={COLORS.secondary}
+                  size={SIZES.md}
+                  name={'trash'}
+                />
               </Pressable>
             </View>
-            <Pressable onPress={onRemoveFromCart}>
-              <Ionicons color={COLORS.secondary} size={30} name={'trash'} />
-            </Pressable>
           </View>
         </View>
       </View>
@@ -85,61 +97,65 @@ const CartGoodCard = ({
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    columnGap: 10,
+    columnGap: SIZES.s,
     alignItems: 'center',
     backgroundColor: COLORS.white,
-    padding: 10,
-    borderRadius: 20,
-    elevation: 1,
-  },
-  content: {
-    flex: 1,
-    rowGap: 20,
+    padding: SIZES.s,
+    borderRadius: SIZES.sm,
+    elevation: 2,
   },
   image: {
     objectFit: 'contain',
   },
+  content: {
+    flex: 1,
+    rowGap: SIZES.sm,
+  },
   title: {
-    fontSize: 14,
+    fontSize: SIZES.h6,
     color: COLORS.text,
   },
   actions: {
     flexDirection: 'row',
     justifyContent: 'space-between',
+  },
+  col: {
     alignItems: 'center',
+    rowGap: SIZES.sm,
+  },
+  price: {
+    color: COLORS.secondary,
+    fontSize: SIZES.h4,
   },
   cartArea: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-  },
-  cartCount: {
-    minWidth: 40,
-    textAlign: 'center',
-    color: COLORS.secondary,
-    fontSize: 16,
+    backgroundColor: COLORS.primaryLight,
+    borderRadius: SIZES.sm,
   },
   countButton: {
-    width: 40,
-    height: 40,
+    width: SIZES.l,
+    height: SIZES.l,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 10,
+    borderRadius: SIZES.sm,
     backgroundColor: COLORS.primary,
   },
-  priceArea: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-  },
-  price: {
-    marginLeft: 30,
-    color: COLORS.secondary,
-    fontSize: 18,
+  cartCount: {
+    minWidth: SIZES.xl,
+    textAlign: 'center',
+    color: COLORS.text,
+    fontSize: SIZES.h4,
+    fontWeight: 'bold',
   },
   priceCount: {
     color: COLORS.green,
-    fontSize: 20,
+    fontSize: SIZES.h3,
     fontWeight: 'bold',
+  },
+  deleteBtn: {
+    alignSelf: 'flex-end',
   },
 });
 

@@ -1,5 +1,5 @@
 import {Button, Image, StyleSheet, Text, View} from 'react-native';
-import {ASSETS, COLORS} from 'constants/theme';
+import {ASSETS, COLORS, SIZES} from 'constants/theme';
 
 type EmptyCartProps = {
   onPress: () => void;
@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    rowGap: 30,
+    rowGap: SIZES.md,
   },
   img: {
     width: 300,
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: COLORS.text,
-    fontSize: 28,
+    fontSize: SIZES.h1,
     fontWeight: 'bold',
   },
 });

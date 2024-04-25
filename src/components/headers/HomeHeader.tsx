@@ -1,7 +1,7 @@
 import {Image, Linking, Pressable, StyleSheet, Text, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {PHONE_NUMBER} from 'constants/general';
-import {ASSETS, COLORS} from 'constants/theme';
+import {ASSETS, COLORS, SIZES} from 'constants/theme';
 
 const HomeHeader = () => {
   return (
@@ -14,7 +14,7 @@ const HomeHeader = () => {
         onPress={() => {
           Linking.openURL(`tel:${PHONE_NUMBER}`);
         }}>
-        <Ionicons name="call" size={25} color={COLORS.black} />
+        <Ionicons name="call" size={SIZES.m} color={COLORS.black} />
       </Pressable>
     </View>
   );
@@ -32,13 +32,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   img: {
-    width: 60,
-    height: 40,
+    width: 50,
+    height: 30,
     objectFit: 'contain',
   },
   title: {
-    marginLeft: 10,
-    fontSize: 20,
+    marginLeft: SIZES.s,
+    fontSize: SIZES.h3,
     fontWeight: '600',
     color: COLORS.black,
   },

@@ -2,7 +2,7 @@ import {StyleSheet, View} from 'react-native';
 import AnimalIcon from './AnimalIcon';
 import {useGoodMenuStore} from 'store/goodMenuStore';
 import {Animal} from 'types/goodMenu';
-import {COLORS} from 'constants/theme';
+import {COLORS, SIZES} from 'constants/theme';
 
 const icons = [
   {name: 'paw', animal: Animal.All, title: 'Все'},
@@ -32,7 +32,7 @@ const AnimalBar = () => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingVertical: 5,
+    paddingVertical: SIZES.xs,
     flexDirection: 'row',
     justifyContent: 'space-around',
     borderBottomColor: COLORS.secondaryLight,

@@ -7,7 +7,7 @@ import {useGoodListQuery} from 'queries/goodQuery';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {TabNavigatorParamList} from 'navigation/TabNavigator';
 import {Screens} from 'types/Screens';
-import {COLORS} from 'constants/theme';
+import {COLORS, SIZES} from 'constants/theme';
 
 type CartScreenProps = BottomTabScreenProps<
   TabNavigatorParamList,
@@ -61,7 +61,7 @@ const CartScreen = ({navigation}: CartScreenProps) => {
                 data={goods}
                 keyExtractor={item => item.id.toString()}
                 contentContainerStyle={styles.row}
-                fadingEdgeLength={20}
+                fadingEdgeLength={SIZES.sm}
                 renderItem={({item: good}) => (
                   <CartGoodCard
                     goodData={good}
@@ -104,15 +104,15 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   row: {
-    gap: 10,
-    padding: 10,
+    padding: SIZES.s,
+    gap: SIZES.s,
   },
   text: {
-    fontSize: 16,
+    fontSize: SIZES.h5,
     color: COLORS.secondary,
   },
   infoText: {
-    fontSize: 20,
+    fontSize: SIZES.h3,
     color: COLORS.text,
     fontWeight: '700',
   },
@@ -125,19 +125,20 @@ const styles = StyleSheet.create({
     borderColor: COLORS.secondaryLight,
   },
   cartInfo: {
-    paddingLeft: 10,
+    paddingLeft: SIZES.sm,
   },
   orderButton: {
     width: '50%',
-    height: 50,
-    margin: 10,
+    height: SIZES.xl,
+    margin: SIZES.s,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: COLORS.primary,
-    borderRadius: 10,
+    borderRadius: SIZES.s,
   },
   orderButtonTitle: {
-    fontSize: 18,
+    fontSize: SIZES.h4,
+    fontWeight: '500',
     color: COLORS.white,
   },
 });

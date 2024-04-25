@@ -7,6 +7,7 @@ import {useCartStore} from 'store/cartStore';
 import {useGoodMenuStore} from 'store/goodMenuStore';
 import {GoodData} from 'types/good';
 import GoodListSkeleton from 'components/placeholders/GoodListSkeleton';
+import {SIZES} from 'constants/theme';
 
 const NUM_COLUMNS = 2;
 
@@ -56,10 +57,10 @@ const GoodList = () => {
             hasNextPage && !isFetchingNextPage && fetchNextPage();
           }}
           ListFooterComponent={
-            <>{isFetchingNextPage && <ActivityIndicator size={50} />}</>
+            <>{isFetchingNextPage && <ActivityIndicator size={SIZES.xl} />}</>
           }
           contentContainerStyle={styles.listContainer}
-          fadingEdgeLength={20}
+          fadingEdgeLength={SIZES.sm}
           estimatedItemSize={300}
           renderItem={renderItem}
         />
@@ -73,7 +74,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   listContainer: {
-    padding: 5,
+    padding: SIZES.xs,
   },
 });
 
