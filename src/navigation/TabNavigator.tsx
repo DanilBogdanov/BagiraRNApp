@@ -1,10 +1,11 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import CatalogHeader from 'components/headers/CatalogHeader';
 import HomeHeader from 'components/headers/HomeHeader';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {HomeScreen, CatalogScreen, ProfileScreen, CartScreen} from 'screens';
+import {HomeScreen, ProfileScreen, CartScreen} from 'screens';
 import {useCartStore} from 'store/cartStore';
 import {Screens} from 'types/Screens';
+import CatalogNavigator, {CatalogNavigatorParamList} from './CatalogNavigator';
+import {NavigatorScreenParams} from '@react-navigation/native';
 
 type IconProps = {
   name: string;
@@ -23,7 +24,7 @@ const icon = ({name, focused, size, color}: IconProps) => (
 
 export type TabNavigatorParamList = {
   [Screens.Home]: undefined;
-  [Screens.Catalog]: undefined;
+  [Screens.CatalogNavigator]: NavigatorScreenParams<CatalogNavigatorParamList>;
   [Screens.Profile]: undefined;
   [Screens.Cart]: undefined;
 };
@@ -45,11 +46,11 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name={Screens.Catalog}
-        component={CatalogScreen}
+        name={Screens.CatalogNavigator}
+        component={CatalogNavigator}
         options={{
           title: 'Каталог',
-          headerTitle: CatalogHeader,
+          headerShown: false,
           tabBarIcon: prop => icon({name: 'storefront', ...prop}),
         }}
       />
