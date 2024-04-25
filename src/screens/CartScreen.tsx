@@ -51,7 +51,13 @@ const CartScreen = ({navigation}: CartScreenProps) => {
   return (
     <View style={styles.container}>
       {cart.size === 0 ? (
-        <EmptyCart onPress={() => navigation.navigate(Screens.Catalog)} />
+        <EmptyCart
+          onPress={() =>
+            navigation.navigate(Screens.CatalogNavigator, {
+              screen: Screens.Catalog,
+            })
+          }
+        />
       ) : (
         <View style={styles.cart}>
           {isGoodsLoading && <CartSkeleton />}
