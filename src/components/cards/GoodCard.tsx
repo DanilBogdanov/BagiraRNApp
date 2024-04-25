@@ -2,7 +2,7 @@ import {memo} from 'react';
 import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {GoodData} from 'types/good';
-import {COLORS} from 'constants/theme';
+import {COLORS, SIZES} from 'constants/theme';
 
 const BASE_URL = 'https://danildev.net/';
 
@@ -29,7 +29,7 @@ const GoodCard = ({
         height={130}
         width={130}
       />
-      <Text numberOfLines={5} style={styles.title}>
+      <Text numberOfLines={4} style={styles.title}>
         {goodData.name}
       </Text>
       <Text style={styles.price}>{goodData.price}₽</Text>
@@ -38,20 +38,20 @@ const GoodCard = ({
           <Pressable
             style={styles.countButton}
             onPress={() => decreaseInCart(goodData.id)}>
-            <Ionicons color={COLORS.white} size={30} name={'remove'} />
+            <Ionicons color={COLORS.white} size={SIZES.md} name={'remove'} />
           </Pressable>
           <Text style={styles.cartCount}>{cartCount}</Text>
           <Pressable
             style={styles.countButton}
             onPress={() => increaseInCart(goodData.id)}>
-            <Ionicons color={COLORS.white} size={30} name={'add'} />
+            <Ionicons color={COLORS.white} size={SIZES.md} name={'add'} />
           </Pressable>
         </View>
       ) : (
         <Pressable
           style={styles.buyButton}
           onPress={() => addToCart(goodData.id)}>
-          <Ionicons color={COLORS.primary} size={30} name={'cart'} />
+          <Ionicons color={COLORS.primary} size={SIZES.md} name={'cart'} />
         </Pressable>
       )}
     </View>
@@ -65,11 +65,11 @@ const styles = StyleSheet.create({
     height: 300,
     justifyContent: 'space-between',
     alignItems: 'center',
-    margin: 5,
+    margin: SIZES.xs,
     alignSelf: 'flex-end',
-    padding: 5,
-    rowGap: 5,
-    borderRadius: 20,
+    padding: SIZES.s,
+    rowGap: SIZES.xs,
+    borderRadius: SIZES.sm,
     backgroundColor: COLORS.white,
     elevation: 2,
   },
@@ -78,11 +78,11 @@ const styles = StyleSheet.create({
   },
   title: {
     color: COLORS.text,
-    fontSize: 12,
+    fontSize: SIZES.h6,
   },
   price: {
     color: COLORS.green,
-    fontSize: 20,
+    fontSize: SIZES.h3,
     fontWeight: 'bold',
   },
   cartArea: {
@@ -90,25 +90,28 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
+    backgroundColor: COLORS.primaryLight,
+    borderRadius: SIZES.sm,
   },
   cartCount: {
-    color: COLORS.secondary,
-    fontSize: 16,
+    color: COLORS.text,
+    fontSize: SIZES.h4,
+    fontWeight: 'bold',
   },
   countButton: {
-    width: 40,
-    height: 40,
+    width: SIZES.l,
+    height: SIZES.l,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 20,
+    borderRadius: SIZES.sm,
     backgroundColor: COLORS.primary,
   },
   buyButton: {
     width: '100%',
-    height: 40,
+    height: SIZES.l,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 20,
+    borderRadius: SIZES.sm,
     backgroundColor: COLORS.primaryLight,
   },
 });

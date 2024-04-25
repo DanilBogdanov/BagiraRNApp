@@ -1,6 +1,6 @@
 import {StyleSheet, View} from 'react-native';
 import Skeleton from './Skeleton';
-import {COLORS} from 'constants/theme';
+import {COLORS, SIZES} from 'constants/theme';
 
 const CartGoodCardSkeleton = () => {
   return (
@@ -20,16 +20,16 @@ const CartGoodCardSkeleton = () => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    columnGap: 10,
+    columnGap: SIZES.s,
     alignItems: 'center',
     backgroundColor: COLORS.white,
-    padding: 10,
-    borderRadius: 20,
-    elevation: 1,
+    padding: SIZES.s,
+    borderRadius: SIZES.sm,
+    elevation: 2,
   },
   content: {
     flex: 1,
-    rowGap: 20,
+    rowGap: SIZES.sm,
   },
   actions: {
     flexDirection: 'row',

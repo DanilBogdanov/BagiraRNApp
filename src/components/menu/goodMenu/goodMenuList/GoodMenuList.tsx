@@ -3,7 +3,7 @@ import GoodMenuListItem from './GoodMenuListItem';
 import {useGoodMenuStore} from 'store/goodMenuStore';
 import {useGoodMenuQuery} from 'queries/goodMenuQuery';
 import {GoodMenuData} from 'types/goodMenu';
-import {COLORS} from 'constants/theme';
+import {COLORS, SIZES} from 'constants/theme';
 
 const GoodMenuList = () => {
   const selectedAnimal = useGoodMenuStore(state => state.selectedAnimal);
@@ -23,8 +23,9 @@ const GoodMenuList = () => {
     return (
       <FlatList
         data={items}
+        contentContainerStyle={styles.list}
         keyExtractor={item => item.id.toString()}
-        fadingEdgeLength={20}
+        fadingEdgeLength={SIZES.sm}
         renderItem={({item}) => {
           const isExpanded = expanded.includes(item.id);
 
@@ -63,9 +64,12 @@ const GoodMenuList = () => {
 };
 
 const styles = StyleSheet.create({
+  list: {
+    paddingVertical: SIZES.s,
+  },
   menuItem: {
-    paddingLeft: 10,
-    paddingBottom: 3,
+    paddingLeft: SIZES.s,
+    paddingBottom: SIZES.xs,
     borderLeftWidth: 0.5,
     borderLeftColor: COLORS.secondary,
   },
