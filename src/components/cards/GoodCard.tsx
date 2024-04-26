@@ -1,5 +1,6 @@
 import {memo} from 'react';
 import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
+import {BuyButton} from 'components/buttons';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {GoodData} from 'types/good';
 import {COLORS, SIZES} from 'constants/theme';
@@ -9,6 +10,7 @@ const BASE_URL = 'https://danildev.net/';
 type GoodCardProps = {
   goodData: GoodData;
   cartCount?: number;
+  onPress: (id: number) => void;
   addToCart: (id: number) => void;
   increaseInCart: (id: number) => void;
   decreaseInCart: (id: number) => void;
@@ -17,12 +19,13 @@ type GoodCardProps = {
 const GoodCard = ({
   goodData,
   cartCount,
+  onPress,
   addToCart,
   increaseInCart,
   decreaseInCart,
 }: GoodCardProps) => {
   return (
-    <View style={styles.container}>
+    <Pressable style={styles.container} onPress={() => onPress(goodData.id)}>
       <Image
         style={styles.image}
         source={{uri: BASE_URL + goodData.imgUrl}}
@@ -48,13 +51,9 @@ const GoodCard = ({
           </Pressable>
         </View>
       ) : (
-        <Pressable
-          style={styles.buyButton}
-          onPress={() => addToCart(goodData.id)}>
-          <Ionicons color={COLORS.primary} size={SIZES.md} name={'cart'} />
-        </Pressable>
+        <BuyButton onPress={() => addToCart(goodData.id)} />
       )}
-    </View>
+    </Pressable>
   );
 };
 
@@ -105,14 +104,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: SIZES.sm,
     backgroundColor: COLORS.primary,
-  },
-  buyButton: {
-    width: '100%',
-    height: SIZES.l,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: SIZES.sm,
-    backgroundColor: COLORS.primaryLight,
   },
 });
 
