@@ -1,4 +1,4 @@
-import {createStackNavigator} from '@react-navigation/stack';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import CatalogHeader from 'components/headers/CatalogHeader';
 import {CatalogScreen, DetailedScreen} from 'screens';
 import {Screens} from 'types/Screens';
@@ -8,7 +8,7 @@ export type CatalogNavigatorParamList = {
   [Screens.Detailed]: {id: number};
 };
 
-const Stack = createStackNavigator<CatalogNavigatorParamList>();
+const Stack = createNativeStackNavigator<CatalogNavigatorParamList>();
 
 const CatalogNavigator = () => {
   return (
@@ -20,7 +20,14 @@ const CatalogNavigator = () => {
           headerTitle: CatalogHeader,
         }}
       />
-      <Stack.Screen name={Screens.Detailed} component={DetailedScreen} />
+      <Stack.Screen
+        name={Screens.Detailed}
+        component={DetailedScreen}
+        options={{
+          headerTitle: '',
+          headerShadowVisible: false,
+        }}
+      />
     </Stack.Navigator>
   );
 };
