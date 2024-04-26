@@ -1,7 +1,7 @@
 import {memo} from 'react';
-import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
+import {Image, Pressable, StyleSheet, Text} from 'react-native';
+import {CartCountAction} from 'components/actions';
 import {BuyButton} from 'components/buttons';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import {GoodData} from 'types/good';
 import {COLORS, SIZES} from 'constants/theme';
 
@@ -37,19 +37,11 @@ const GoodCard = ({
       </Text>
       <Text style={styles.price}>{goodData.price}₽</Text>
       {cartCount ? (
-        <View style={styles.cartArea}>
-          <Pressable
-            style={styles.countButton}
-            onPress={() => decreaseInCart(goodData.id)}>
-            <Ionicons color={COLORS.white} size={SIZES.md} name={'remove'} />
-          </Pressable>
-          <Text style={styles.cartCount}>{cartCount}</Text>
-          <Pressable
-            style={styles.countButton}
-            onPress={() => increaseInCart(goodData.id)}>
-            <Ionicons color={COLORS.white} size={SIZES.md} name={'add'} />
-          </Pressable>
-        </View>
+        <CartCountAction
+          cartCount={cartCount}
+          onIncrease={() => increaseInCart(goodData.id)}
+          onDecrease={() => decreaseInCart(goodData.id)}
+        />
       ) : (
         <BuyButton onPress={() => addToCart(goodData.id)} />
       )}
@@ -83,27 +75,6 @@ const styles = StyleSheet.create({
     color: COLORS.green,
     fontSize: SIZES.h3,
     fontWeight: 'bold',
-  },
-  cartArea: {
-    width: '100%',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: COLORS.primaryLight,
-    borderRadius: SIZES.sm,
-  },
-  cartCount: {
-    color: COLORS.text,
-    fontSize: SIZES.h4,
-    fontWeight: 'bold',
-  },
-  countButton: {
-    width: SIZES.l,
-    height: SIZES.l,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: SIZES.sm,
-    backgroundColor: COLORS.primary,
   },
 });
 
