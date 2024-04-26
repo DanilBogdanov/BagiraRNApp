@@ -1,6 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
-import {COLORS, SIZES} from 'constants/theme';
 import CartCountButton from './CartCountButton';
+import {COLORS, SIZES} from 'constants/theme';
 
 type CartCountActionProps = {
   cartCount: number;
