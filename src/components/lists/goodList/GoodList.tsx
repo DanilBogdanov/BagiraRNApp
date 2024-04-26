@@ -8,10 +8,16 @@ import {useGoodMenuStore} from 'store/goodMenuStore';
 import {GoodData} from 'types/good';
 import GoodListSkeleton from 'components/placeholders/GoodListSkeleton';
 import {SIZES} from 'constants/theme';
+import {CatalogNavigationProps} from 'screens/CatalogScreen';
+import {Screens} from 'types/Screens';
 
 const NUM_COLUMNS = 2;
 
-const GoodList = () => {
+type GoodListProps = {
+  navigation: CatalogNavigationProps;
+};
+
+const GoodList = ({navigation}: GoodListProps) => {
   const listRef = useRef<FlashList<GoodData> | null>(null);
   const selectedAnimal = useGoodMenuStore(state => state.selectedAnimal);
   const selectedGoodGroup = useGoodMenuStore(state => state.selectedGoodGroup);
@@ -19,6 +25,10 @@ const GoodList = () => {
   const addToCart = useCartStore(state => state.add);
   const increaseInCart = useCartStore(state => state.increase);
   const decreaseInCart = useCartStore(state => state.decrease);
+
+  const onPress = (id: number) => {
+    navigation.navigate(Screens.Detailed, {id});
+  };
 
   useEffect(() => {
     listRef.current?.scrollToOffset({offset: 0});
@@ -37,6 +47,7 @@ const GoodList = () => {
     <GoodCard
       goodData={item}
       cartCount={cart.get(item.id)}
+      onPress={onPress}
       addToCart={addToCart}
       increaseInCart={increaseInCart}
       decreaseInCart={decreaseInCart}

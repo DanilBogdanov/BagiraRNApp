@@ -5,8 +5,18 @@ import GoodMenu from 'components/menu/goodMenu/GoodMenu';
 import GoodList from 'components/lists/goodList/GoodList';
 import {useGoodMenuStore} from 'store/goodMenuStore';
 import {COLORS, SIZES} from 'constants/theme';
+import {StackScreenProps} from '@react-navigation/stack';
+import {CatalogNavigatorParamList} from 'navigation/CatalogNavigator';
+import {Screens} from 'types/Screens';
 
-const CatalogScreen = () => {
+type CatalogScreenProps = StackScreenProps<
+  CatalogNavigatorParamList,
+  Screens.Catalog
+>;
+
+export type CatalogNavigationProps = CatalogScreenProps['navigation'];
+
+const CatalogScreen = ({navigation}: CatalogScreenProps) => {
   const isDrawerOpened = useGoodMenuStore(state => state.isDrawerOpened);
   const setIsDrawerOpened = useGoodMenuStore(state => state.setIsDrawerOpened);
 
@@ -26,7 +36,7 @@ const CatalogScreen = () => {
             <Ionicons color={COLORS.white} size={30} name={'list-outline'} />
           </View>
         </Pressable>
-        <GoodList />
+        <GoodList navigation={navigation} />
       </View>
     </Drawer>
   );

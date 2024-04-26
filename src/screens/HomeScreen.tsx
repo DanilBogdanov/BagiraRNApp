@@ -36,7 +36,9 @@ const HomeScreen = ({navigation}: HomeScreenProps) => {
             onPress={() => {
               setSelectedAnimal(item.animal);
               setIsDrawerOpened(true);
-              navigation.navigate(Screens.Catalog);
+              navigation.navigate(Screens.CatalogNavigator, {
+                screen: Screens.Catalog,
+              });
             }}
           />
         ))}
