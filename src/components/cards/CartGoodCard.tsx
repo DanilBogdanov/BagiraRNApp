@@ -3,6 +3,7 @@ import {Alert, Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {GoodData} from 'types/good';
 import {COLORS, SIZES} from 'constants/theme';
+import {CartCountAction} from 'components/actions';
 
 const BASE_URL = 'https://danildev.net/';
 
@@ -55,25 +56,13 @@ const CartGoodCard = ({
         <View style={styles.content}>
           <Text style={styles.title}>{goodData.name}</Text>
           <View style={styles.actions}>
-            <View style={styles.col}>
+            <View style={[styles.col, styles.leftCol]}>
               <Text style={styles.price}>{goodData.price}₽</Text>
-              <View style={styles.cartArea}>
-                <Pressable
-                  style={styles.countButton}
-                  onPress={onDecreaseInCart}>
-                  <Ionicons
-                    color={COLORS.white}
-                    size={SIZES.md}
-                    name={'remove'}
-                  />
-                </Pressable>
-                <Text style={styles.cartCount}>{cartCount}</Text>
-                <Pressable
-                  style={styles.countButton}
-                  onPress={() => increaseInCart(goodData.id)}>
-                  <Ionicons color={COLORS.white} size={SIZES.md} name={'add'} />
-                </Pressable>
-              </View>
+              <CartCountAction
+                cartCount={cartCount}
+                onIncrease={() => increaseInCart(goodData.id)}
+                onDecrease={onDecreaseInCart}
+              />
             </View>
             <View style={styles.col}>
               <Text style={styles.priceCount}>
@@ -123,31 +112,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     rowGap: SIZES.sm,
   },
+  leftCol: {
+    width: 140,
+  },
   price: {
     color: COLORS.secondary,
     fontSize: SIZES.h4,
-  },
-  cartArea: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: COLORS.primaryLight,
-    borderRadius: SIZES.sm,
-  },
-  countButton: {
-    width: SIZES.l,
-    height: SIZES.l,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: SIZES.sm,
-    backgroundColor: COLORS.primary,
-  },
-  cartCount: {
-    minWidth: SIZES.xl,
-    textAlign: 'center',
-    color: COLORS.text,
-    fontSize: SIZES.h4,
-    fontWeight: 'bold',
   },
   priceCount: {
     color: COLORS.green,
