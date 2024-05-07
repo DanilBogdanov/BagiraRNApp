@@ -4,14 +4,18 @@ import {COLORS, SIZES} from 'constants/theme';
 
 type CartCountButtonProps = {
   type: 'increase' | 'decrease';
+  disabled?: boolean;
   onPress: () => void;
 };
 
-const CartCountButton = ({type, onPress}: CartCountButtonProps) => {
+const CartCountButton = ({type, disabled, onPress}: CartCountButtonProps) => {
   const iconName = type === 'increase' ? 'add' : 'remove';
 
   return (
-    <Pressable style={styles.container} onPress={onPress}>
+    <Pressable
+      disabled={disabled}
+      style={[styles.container, disabled && styles.disabled]}
+      onPress={onPress}>
       <Ionicons color={COLORS.white} size={SIZES.md} name={iconName} />
     </Pressable>
   );
@@ -25,6 +29,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: SIZES.sm,
     backgroundColor: COLORS.primary,
+  },
+  disabled: {
+    backgroundColor: COLORS.primaryLight,
   },
 });
 
