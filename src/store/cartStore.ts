@@ -66,6 +66,8 @@ export const useCartStore = create<CartStore>()(
         set(state => {
           if (value > 0) {
             state.cart.set(id, value);
+          } else {
+            state.cart.delete(id);
           }
         });
       },

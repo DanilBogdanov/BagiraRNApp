@@ -1,5 +1,6 @@
 import {StyleSheet, View} from 'react-native';
 import GoodCardSkeleton from './GoodCardSkeleton';
+import {SIZES} from 'constants/theme';
 
 type GoodListSkeletonProps = {
   numColumns: number;
@@ -24,7 +25,7 @@ const GoodListSkeleton = ({numColumns}: GoodListSkeletonProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 5,
+    padding: SIZES.xs,
   },
   row: {
     justifyContent: 'space-between',

@@ -1,6 +1,7 @@
 import {memo} from 'react';
 import {StyleSheet, View} from 'react-native';
 import Skeleton from './Skeleton';
+import {COLORS, SIZES} from 'constants/theme';
 
 const GoodCardSkeleton = () => {
   return (
@@ -8,7 +9,7 @@ const GoodCardSkeleton = () => {
       <Skeleton width={130} height={130} />
       <Skeleton width={'90%'} height={50} />
       <Skeleton width={50} height={30} />
-      <Skeleton width={'100%'} height={40} radius={20} />
+      <Skeleton width={'100%'} height={40} radius={SIZES.sm} />
     </View>
   );
 };
@@ -20,12 +21,12 @@ const styles = StyleSheet.create({
     height: 300,
     justifyContent: 'space-between',
     alignItems: 'center',
-    margin: 5,
+    margin: SIZES.xs,
     alignSelf: 'flex-end',
-    padding: 5,
-    rowGap: 5,
-    borderRadius: 20,
-    backgroundColor: '#fff',
+    padding: SIZES.s,
+    rowGap: SIZES.xs,
+    borderRadius: SIZES.sm,
+    backgroundColor: COLORS.white,
     elevation: 2,
   },
 });

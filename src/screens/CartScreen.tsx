@@ -1,14 +1,21 @@
 import {FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
 import CartGoodCard from 'components/cards/CartGoodCard';
-import {useCartStore} from 'store/cartStore';
-import {useGoodListQuery} from 'queries/goodQuery';
 import EmptyCart from 'components/placeholders/EmptyCart';
 import CartSkeleton from 'components/placeholders/CartSkeleton';
+import {useCartStore} from 'store/cartStore';
+import {useGoodListQuery} from 'queries/goodQuery';
+import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
+import {TabNavigatorParamList} from 'navigation/TabNavigator';
+import {Screens} from 'types/Screens';
+import {COLORS, SIZES} from 'constants/theme';
 
-const CartScreen = () => {
+type CartScreenProps = BottomTabScreenProps<
+  TabNavigatorParamList,
+  Screens.Cart
+>;
+
+const CartScreen = ({navigation}: CartScreenProps) => {
   const cart = useCartStore(state => state.cart);
-  const increaseInCart = useCartStore(state => state.increase);
-  const decreaseInCart = useCartStore(state => state.decrease);
   const removeFromCart = useCartStore(state => state.remove);
 
   const keys = Array.from(cart.keys());
@@ -42,7 +49,13 @@ const CartScreen = () => {
   return (
     <View style={styles.container}>
       {cart.size === 0 ? (
-        <EmptyCart />
+        <EmptyCart
+          onPress={() =>
+            navigation.navigate(Screens.CatalogNavigator, {
+              screen: Screens.Catalog,
+            })
+          }
+        />
       ) : (
         <View style={styles.cart}>
           {isGoodsLoading && <CartSkeleton />}
@@ -52,14 +65,11 @@ const CartScreen = () => {
                 data={goods}
                 keyExtractor={item => item.id.toString()}
                 contentContainerStyle={styles.row}
-                fadingEdgeLength={20}
+                fadingEdgeLength={SIZES.sm}
                 renderItem={({item: good}) => (
                   <CartGoodCard
                     goodData={good}
                     cartCount={cart.get(good.id) ?? 0}
-                    removeFromCart={removeFromCart}
-                    increaseInCart={increaseInCart}
-                    decreaseInCart={decreaseInCart}
                   />
                 )}
               />
@@ -95,41 +105,42 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   row: {
-    gap: 10,
-    padding: 10,
+    padding: SIZES.s,
+    gap: SIZES.s,
   },
   text: {
-    fontSize: 16,
-    color: '#777',
+    fontSize: SIZES.h5,
+    color: COLORS.secondary,
   },
   infoText: {
-    fontSize: 20,
-    color: '#555',
+    fontSize: SIZES.h3,
+    color: COLORS.text,
     fontWeight: '700',
   },
   orderArea: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: COLORS.white,
     borderTopWidth: 1,
-    borderColor: '#ddd',
+    borderColor: COLORS.secondaryLight,
   },
   cartInfo: {
-    paddingLeft: 10,
+    paddingLeft: SIZES.sm,
   },
   orderButton: {
     width: '50%',
-    height: 50,
-    margin: 10,
+    height: SIZES.xl,
+    margin: SIZES.s,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#4F8EF7',
-    borderRadius: 10,
+    backgroundColor: COLORS.primary,
+    borderRadius: SIZES.s,
   },
   orderButtonTitle: {
-    fontSize: 18,
-    color: 'white',
+    fontSize: SIZES.h4,
+    fontWeight: '500',
+    color: COLORS.white,
   },
 });
 

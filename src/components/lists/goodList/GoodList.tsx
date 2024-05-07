@@ -1,4 +1,4 @@
-import {useEffect, useRef} from 'react';
+import {useCallback, useEffect, useRef} from 'react';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import {FlashList} from '@shopify/flash-list';
 import GoodCard from 'components/cards/GoodCard';
@@ -7,17 +7,28 @@ import {useCartStore} from 'store/cartStore';
 import {useGoodMenuStore} from 'store/goodMenuStore';
 import {GoodData} from 'types/good';
 import GoodListSkeleton from 'components/placeholders/GoodListSkeleton';
+import {SIZES} from 'constants/theme';
+import {CatalogNavigationProps} from 'screens/CatalogScreen';
+import {Screens} from 'types/Screens';
 
 const NUM_COLUMNS = 2;
 
-const GoodList = () => {
+type GoodListProps = {
+  navigation: CatalogNavigationProps;
+};
+
+const GoodList = ({navigation}: GoodListProps) => {
   const listRef = useRef<FlashList<GoodData> | null>(null);
   const selectedAnimal = useGoodMenuStore(state => state.selectedAnimal);
   const selectedGoodGroup = useGoodMenuStore(state => state.selectedGoodGroup);
   const cart = useCartStore(state => state.cart);
-  const addToCart = useCartStore(state => state.add);
-  const increaseInCart = useCartStore(state => state.increase);
-  const decreaseInCart = useCartStore(state => state.decrease);
+
+  const onPress = useCallback(
+    (id: number) => {
+      navigation.navigate(Screens.Detailed, {id});
+    },
+    [navigation],
+  );
 
   useEffect(() => {
     listRef.current?.scrollToOffset({offset: 0});
@@ -33,13 +44,7 @@ const GoodList = () => {
   } = useGoodsInfiniteQuery(selectedAnimal, selectedGoodGroup?.id ?? null);
 
   const renderItem = ({item}: {item: GoodData}) => (
-    <GoodCard
-      goodData={item}
-      cartCount={cart.get(item.id)}
-      addToCart={addToCart}
-      increaseInCart={increaseInCart}
-      decreaseInCart={decreaseInCart}
-    />
+    <GoodCard goodData={item} cartCount={cart.get(item.id)} onPress={onPress} />
   );
 
   return (
@@ -56,10 +61,10 @@ const GoodList = () => {
             hasNextPage && !isFetchingNextPage && fetchNextPage();
           }}
           ListFooterComponent={
-            <>{isFetchingNextPage && <ActivityIndicator size={50} />}</>
+            <>{isFetchingNextPage && <ActivityIndicator size={SIZES.xl} />}</>
           }
           contentContainerStyle={styles.listContainer}
-          fadingEdgeLength={20}
+          fadingEdgeLength={SIZES.sm}
           estimatedItemSize={300}
           renderItem={renderItem}
         />
@@ -73,7 +78,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   listContainer: {
-    padding: 5,
+    padding: SIZES.xs,
   },
 });
 

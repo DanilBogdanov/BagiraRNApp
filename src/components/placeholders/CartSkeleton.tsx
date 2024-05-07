@@ -1,6 +1,7 @@
 import {StyleSheet, View} from 'react-native';
 import CartGoodCardSkeleton from './CartGoodCardSkeleton';
 import Skeleton from './Skeleton';
+import {COLORS, SIZES} from 'constants/theme';
 
 const CartSkeleton = () => {
   return (
@@ -23,17 +24,17 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   list: {
-    padding: 10,
-    gap: 10,
+    padding: SIZES.s,
+    gap: SIZES.s,
   },
   orderArea: {
-    padding: 10,
+    padding: SIZES.s,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    backgroundColor: 'white',
+    backgroundColor: COLORS.white,
     borderTopWidth: 1,
-    borderColor: '#ddd',
+    borderColor: COLORS.secondaryLight,
   },
 });
 

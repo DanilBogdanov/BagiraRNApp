@@ -1,5 +1,6 @@
 import {View, Text, Pressable, StyleSheet} from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import {COLORS, SIZES} from 'constants/theme';
 
 type GoodMenuListItemProps = {
   title: string;
@@ -29,8 +30,8 @@ const GoodMenuListItem = ({
         <Pressable onPress={onPressExpand}>
           <View style={[styles.expandedButton, isExpanded && styles.expanded]}>
             <Ionicons
-              color={isExpanded ? '#4F8EF7' : '#c9c9c9'}
-              size={20}
+              color={isExpanded ? COLORS.primary : COLORS.secondary}
+              size={SIZES.m}
               name={isExpanded ? 'chevron-up' : 'chevron-down'}
             />
           </View>
@@ -50,26 +51,26 @@ const styles = StyleSheet.create({
     flexShrink: 1,
   },
   text: {
-    padding: 5,
-    fontSize: 17,
-    color: '#999',
+    padding: SIZES.xs,
+    fontSize: SIZES.h4,
+    color: COLORS.secondary,
   },
   active: {
-    color: '#4F8EF7',
-    backgroundColor: '#f0f6ff',
-    borderRadius: 10,
+    color: COLORS.primary,
+    backgroundColor: COLORS.primaryLight,
+    borderRadius: SIZES.s,
   },
   expandedButton: {
-    padding: 5,
-    marginHorizontal: 5,
+    padding: SIZES.xs,
+    marginHorizontal: SIZES.xs,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgb(240, 240, 240)',
+    backgroundColor: COLORS.secondaryLight,
     alignSelf: 'center',
-    borderRadius: 10,
+    borderRadius: SIZES.s,
   },
   expanded: {
-    backgroundColor: '#f0f6ff',
+    backgroundColor: COLORS.primaryLight,
   },
 });
 

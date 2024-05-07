@@ -4,8 +4,19 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import GoodMenu from 'components/menu/goodMenu/GoodMenu';
 import GoodList from 'components/lists/goodList/GoodList';
 import {useGoodMenuStore} from 'store/goodMenuStore';
+import {COLORS, SIZES} from 'constants/theme';
+import {StackScreenProps} from '@react-navigation/stack';
+import {CatalogNavigatorParamList} from 'navigation/CatalogNavigator';
+import {Screens} from 'types/Screens';
 
-const CatalogScreen = () => {
+type CatalogScreenProps = StackScreenProps<
+  CatalogNavigatorParamList,
+  Screens.Catalog
+>;
+
+export type CatalogNavigationProps = CatalogScreenProps['navigation'];
+
+const CatalogScreen = ({navigation}: CatalogScreenProps) => {
   const isDrawerOpened = useGoodMenuStore(state => state.isDrawerOpened);
   const setIsDrawerOpened = useGoodMenuStore(state => state.setIsDrawerOpened);
 
@@ -22,10 +33,10 @@ const CatalogScreen = () => {
           style={styles.listButtonContainer}
           onPress={() => setIsDrawerOpened(true)}>
           <View style={styles.listButton}>
-            <Ionicons color={'#fff'} size={30} name={'list-outline'} />
+            <Ionicons color={COLORS.white} size={30} name={'list-outline'} />
           </View>
         </Pressable>
-        <GoodList />
+        <GoodList navigation={navigation} />
       </View>
     </Drawer>
   );
@@ -34,18 +45,16 @@ const CatalogScreen = () => {
 const styles = StyleSheet.create({
   listButtonContainer: {
     position: 'absolute',
-    left: 20,
-    top: 20,
+    left: SIZES.sm,
+    top: SIZES.sm,
     zIndex: 10,
   },
   listButton: {
-    padding: 7,
+    padding: SIZES.s,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'red',
-    borderRadius: 10,
-    elevation: 10,
-    opacity: 15,
+    backgroundColor: COLORS.red,
+    borderRadius: SIZES.s,
   },
 });
 

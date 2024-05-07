@@ -1,9 +1,11 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import CatalogHeader from 'components/headers/CatalogHeader';
+import HomeHeader from 'components/headers/HomeHeader';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {HomeScreen, CatalogScreen, ProfileScreen, CartScreen} from 'screens';
+import {HomeScreen, ProfileScreen, CartScreen} from 'screens';
 import {useCartStore} from 'store/cartStore';
 import {Screens} from 'types/Screens';
+import CatalogNavigator, {CatalogNavigatorParamList} from './CatalogNavigator';
+import {NavigatorScreenParams} from '@react-navigation/native';
 
 type IconProps = {
   name: string;
@@ -12,20 +14,25 @@ type IconProps = {
   color: string;
 };
 
-const Tab = createBottomTabNavigator();
+const icon = ({name, focused, size, color}: IconProps) => (
+  <Ionicons
+    name={focused ? name : `${name}-outline`}
+    size={size}
+    color={color}
+  />
+);
+
+export type TabNavigatorParamList = {
+  [Screens.Home]: undefined;
+  [Screens.CatalogNavigator]: NavigatorScreenParams<CatalogNavigatorParamList>;
+  [Screens.Profile]: undefined;
+  [Screens.Cart]: undefined;
+};
+
+const Tab = createBottomTabNavigator<TabNavigatorParamList>();
 
 const TabNavigator = () => {
   const cart = useCartStore(state => state.cart);
-
-  const icon = ({name, focused, size, color}: IconProps) => (
-    <Ionicons
-      name={focused ? name : `${name}-outline`}
-      size={size}
-      color={color}
-    />
-  );
-
-  const catalogHeader = () => <CatalogHeader />;
 
   return (
     <Tab.Navigator>
@@ -34,15 +41,16 @@ const TabNavigator = () => {
         component={HomeScreen}
         options={{
           title: 'Главная',
+          headerTitle: HomeHeader,
           tabBarIcon: prop => icon({name: 'home', ...prop}),
         }}
       />
       <Tab.Screen
-        name={Screens.Catalog}
-        component={CatalogScreen}
+        name={Screens.CatalogNavigator}
+        component={CatalogNavigator}
         options={{
           title: 'Каталог',
-          headerTitle: catalogHeader,
+          headerShown: false,
           tabBarIcon: prop => icon({name: 'storefront', ...prop}),
         }}
       />
