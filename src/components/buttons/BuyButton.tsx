@@ -1,15 +1,18 @@
 import {memo} from 'react';
 import {Pressable, StyleSheet} from 'react-native';
+import {useCartStore} from 'store/cartStore';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {SIZES, COLORS} from 'constants/theme';
 
 type BuyButtonProps = {
-  onPress: () => void;
+  goodId: number;
 };
 
-const BuyButton = ({onPress}: BuyButtonProps) => {
+const BuyButton = ({goodId}: BuyButtonProps) => {
+  const addToCart = useCartStore(state => state.add);
+
   return (
-    <Pressable style={styles.container} onPress={onPress}>
+    <Pressable style={styles.container} onPress={() => addToCart(goodId)}>
       <Ionicons color={COLORS.primary} size={SIZES.md} name={'cart'} />
     </Pressable>
   );
