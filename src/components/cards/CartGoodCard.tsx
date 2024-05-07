@@ -1,27 +1,21 @@
 import {memo} from 'react';
 import {Alert, Image, Pressable, StyleSheet, Text, View} from 'react-native';
+import {CartCountAction} from 'components/actions';
+import {useCartStore} from 'store/cartStore';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {GoodData} from 'types/good';
 import {COLORS, SIZES} from 'constants/theme';
-import {CartCountAction} from 'components/actions';
 
 const BASE_URL = 'https://danildev.net/';
 
 type CartGoodCardProps = {
   goodData: GoodData;
   cartCount: number;
-  removeFromCart: (id: number) => void;
-  increaseInCart: (id: number) => void;
-  decreaseInCart: (id: number) => void;
 };
 
-const CartGoodCard = ({
-  goodData,
-  cartCount,
-  removeFromCart,
-  increaseInCart,
-  decreaseInCart,
-}: CartGoodCardProps) => {
+const CartGoodCard = ({goodData, cartCount}: CartGoodCardProps) => {
+  const removeFromCart = useCartStore(state => state.remove);
+
   const onRemoveFromCart = () => {
     Alert.alert(
       'Удалить из корзины?',
@@ -34,14 +28,6 @@ const CartGoodCard = ({
         cancelable: true,
       },
     );
-  };
-
-  const onDecreaseInCart = () => {
-    if (cartCount === 1) {
-      onRemoveFromCart();
-    } else {
-      decreaseInCart(goodData.id);
-    }
   };
 
   return (
@@ -59,9 +45,9 @@ const CartGoodCard = ({
             <View style={[styles.col, styles.leftCol]}>
               <Text style={styles.price}>{goodData.price}₽</Text>
               <CartCountAction
+                goodId={goodData.id}
                 cartCount={cartCount}
-                onIncrease={() => increaseInCart(goodData.id)}
-                onDecrease={onDecreaseInCart}
+                onRemove={onRemoveFromCart}
               />
             </View>
             <View style={styles.col}>
