@@ -16,8 +16,6 @@ type CartScreenProps = BottomTabScreenProps<
 
 const CartScreen = ({navigation}: CartScreenProps) => {
   const cart = useCartStore(state => state.cart);
-  const increaseInCart = useCartStore(state => state.increase);
-  const decreaseInCart = useCartStore(state => state.decrease);
   const removeFromCart = useCartStore(state => state.remove);
 
   const keys = Array.from(cart.keys());
@@ -72,9 +70,6 @@ const CartScreen = ({navigation}: CartScreenProps) => {
                   <CartGoodCard
                     goodData={good}
                     cartCount={cart.get(good.id) ?? 0}
-                    removeFromCart={removeFromCart}
-                    increaseInCart={increaseInCart}
-                    decreaseInCart={decreaseInCart}
                   />
                 )}
               />

@@ -11,19 +11,9 @@ type GoodCardProps = {
   goodData: GoodData;
   cartCount?: number;
   onPress: (id: number) => void;
-  addToCart: (id: number) => void;
-  increaseInCart: (id: number) => void;
-  decreaseInCart: (id: number) => void;
 };
 
-const GoodCard = ({
-  goodData,
-  cartCount,
-  onPress,
-  addToCart,
-  increaseInCart,
-  decreaseInCart,
-}: GoodCardProps) => {
+const GoodCard = ({goodData, cartCount, onPress}: GoodCardProps) => {
   return (
     <Pressable style={styles.container} onPress={() => onPress(goodData.id)}>
       <Image
@@ -37,13 +27,9 @@ const GoodCard = ({
       </Text>
       <Text style={styles.price}>{goodData.price}₽</Text>
       {cartCount ? (
-        <CartCountAction
-          cartCount={cartCount}
-          onIncrease={() => increaseInCart(goodData.id)}
-          onDecrease={() => decreaseInCart(goodData.id)}
-        />
+        <CartCountAction goodId={goodData.id} cartCount={cartCount} />
       ) : (
-        <BuyButton onPress={() => addToCart(goodData.id)} />
+        <BuyButton goodId={goodData.id} />
       )}
     </Pressable>
   );

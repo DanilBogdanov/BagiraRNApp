@@ -1,4 +1,4 @@
-import {useEffect, useRef} from 'react';
+import {useCallback, useEffect, useRef} from 'react';
 import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import {FlashList} from '@shopify/flash-list';
 import GoodCard from 'components/cards/GoodCard';
@@ -22,13 +22,13 @@ const GoodList = ({navigation}: GoodListProps) => {
   const selectedAnimal = useGoodMenuStore(state => state.selectedAnimal);
   const selectedGoodGroup = useGoodMenuStore(state => state.selectedGoodGroup);
   const cart = useCartStore(state => state.cart);
-  const addToCart = useCartStore(state => state.add);
-  const increaseInCart = useCartStore(state => state.increase);
-  const decreaseInCart = useCartStore(state => state.decrease);
 
-  const onPress = (id: number) => {
-    navigation.navigate(Screens.Detailed, {id});
-  };
+  const onPress = useCallback(
+    (id: number) => {
+      navigation.navigate(Screens.Detailed, {id});
+    },
+    [navigation],
+  );
 
   useEffect(() => {
     listRef.current?.scrollToOffset({offset: 0});
@@ -44,14 +44,7 @@ const GoodList = ({navigation}: GoodListProps) => {
   } = useGoodsInfiniteQuery(selectedAnimal, selectedGoodGroup?.id ?? null);
 
   const renderItem = ({item}: {item: GoodData}) => (
-    <GoodCard
-      goodData={item}
-      cartCount={cart.get(item.id)}
-      onPress={onPress}
-      addToCart={addToCart}
-      increaseInCart={increaseInCart}
-      decreaseInCart={decreaseInCart}
-    />
+    <GoodCard goodData={item} cartCount={cart.get(item.id)} onPress={onPress} />
   );
 
   return (

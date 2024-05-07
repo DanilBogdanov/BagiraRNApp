@@ -11,9 +11,6 @@ type CardOrderBlockProps = {
 
 const CardOrderBlock = ({goodData}: CardOrderBlockProps) => {
   const cart = useCartStore(state => state.cart);
-  const addToCart = useCartStore(state => state.add);
-  const increaseInCart = useCartStore(state => state.increase);
-  const decreaseInCart = useCartStore(state => state.decrease);
 
   const cartCount = cart.get(goodData.id);
 
@@ -24,13 +21,9 @@ const CardOrderBlock = ({goodData}: CardOrderBlockProps) => {
       </View>
       <View style={styles.cartArea}>
         {cartCount ? (
-          <CartCountAction
-            cartCount={cartCount}
-            onIncrease={() => increaseInCart(goodData.id)}
-            onDecrease={() => decreaseInCart(goodData.id)}
-          />
+          <CartCountAction goodId={goodData.id} cartCount={cartCount} />
         ) : (
-          <BuyButton onPress={() => addToCart(goodData.id)} />
+          <BuyButton goodId={goodData.id} />
         )}
       </View>
     </View>
