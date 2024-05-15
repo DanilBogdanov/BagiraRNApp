@@ -2,7 +2,7 @@ import {useEffect, useRef, useState} from 'react';
 import {ActivityIndicator, StyleSheet} from 'react-native';
 import {FlashList} from '@shopify/flash-list';
 import GoodCard from 'components/cards/GoodCard';
-import GoodListHeader from 'components/headers/GoodListHeader';
+import {GoodListHeader} from 'components/headers';
 import {useCartStore} from 'store/cartStore';
 import {InfiniteData} from '@tanstack/react-query';
 import {GoodData, GoodResponse} from 'types/good';

@@ -1,6 +1,5 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import CatalogHeader from 'components/headers/CatalogHeader';
-import SearchHeader from 'components/headers/SearchHeader';
+import {CatalogHeader, SearchHeader} from 'components/headers';
 import {CatalogScreen, DetailedScreen, SearchScreen} from 'screens';
 import {Screens} from 'types/Screens';
 
