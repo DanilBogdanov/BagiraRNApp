@@ -1,1 +1,1 @@
-export const CART_COUNT_LIMIT = 300;
+export const CART_COUNT_LIMIT = 280;
