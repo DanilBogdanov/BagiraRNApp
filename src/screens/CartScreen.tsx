@@ -1,5 +1,5 @@
 import {FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
-import CartGoodCard from 'components/cards/CartGoodCard';
+import {CartGoodCard} from 'components/cards';
 import EmptyCart from 'components/placeholders/EmptyCart';
 import CartSkeleton from 'components/placeholders/CartSkeleton';
 import {useCartStore} from 'store/cartStore';
