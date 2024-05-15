@@ -1,7 +1,7 @@
 import {useCallback} from 'react';
 import {StyleSheet, View} from 'react-native';
 import GoodList from './GoodList';
-import GoodListSkeleton from 'components/placeholders/GoodListSkeleton';
+import {GoodListSkeleton} from 'components/skeletons';
 import {useGoodsInfiniteQuery} from 'queries/goodQuery';
 import {useGoodMenuStore} from 'store/goodMenuStore';
 import {CatalogNavigationProps} from 'screens/CatalogScreen';

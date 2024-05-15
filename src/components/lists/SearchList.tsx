@@ -1,7 +1,7 @@
 import {useCallback} from 'react';
 import {StyleSheet, View} from 'react-native';
 import GoodList from './GoodList';
-import GoodListSkeleton from 'components/placeholders/GoodListSkeleton';
+import GoodListSkeleton from 'components/skeletons/GoodListSkeleton';
 import NotFound from 'components/placeholders/NotFound';
 import SearchPlaceholder from 'components/placeholders/SearchPlaceholder';
 import {useSearchInfiniteQuery} from 'queries/goodQuery';
