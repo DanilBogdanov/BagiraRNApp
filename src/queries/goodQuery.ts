@@ -3,7 +3,7 @@ import {
   useInfiniteQuery,
   useQuery,
 } from '@tanstack/react-query';
-import {getGood, getGoodList, getGoods} from 'api/goodApi';
+import {getGood, getGoodList, getGoods, search} from 'api/goodApi';
 import {Animal} from 'types/goodMenu';
 import {QueryKeys} from './keys';
 
@@ -38,6 +38,24 @@ export const useGoodsInfiniteQuery = (animal: Animal, groupId: number | null) =>
         return {
           animal,
           goodRequest: {groupId, skip: lastPage.skip + TAKE, take: TAKE},
+        };
+      }
+    },
+    staleTime: STALE_TIME,
+  });
+
+export const useSearchInfiniteQuery = (query: string) =>
+  useInfiniteQuery({
+    queryKey: [QueryKeys.Search, query],
+    queryFn: search,
+    enabled: !!query,
+    initialPageParam: {
+      searchRequest: {query, skip: 0, take: TAKE},
+    },
+    getNextPageParam: lastPage => {
+      if (lastPage.count > lastPage.skip + TAKE) {
+        return {
+          searchRequest: {query, skip: lastPage.skip + TAKE, take: TAKE},
         };
       }
     },

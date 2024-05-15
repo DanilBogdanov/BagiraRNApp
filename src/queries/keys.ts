@@ -3,4 +3,5 @@ export enum QueryKeys {
   GoodMenu = 'GoodMenu',
   Goods = 'Goods',
   GoodList = 'GoodList',
+  Search = 'Search',
 }
