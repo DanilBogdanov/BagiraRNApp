@@ -19,3 +19,9 @@ export interface GoodRequest {
   take?: number;
   skip?: number;
 }
+
+export interface SearchRequest {
+  query: string;
+  take?: number;
+  skip?: number;
+}
