@@ -1,7 +1,9 @@
 import {Image, StyleSheet, View} from 'react-native';
 import {TabNavigatorParamList} from 'navigation/TabNavigator';
 import AnimalIcon from 'components/menu/goodMenu/animalBar/AnimalIcon';
+import {SearchButton} from 'components/buttons';
 import {useGoodMenuStore} from 'store/goodMenuStore';
+import {useSearchStore} from 'store/searchStore';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {Screens} from 'types/Screens';
 import {Animal} from 'types/goodMenu';
@@ -22,9 +24,19 @@ type HomeScreenProps = BottomTabScreenProps<
 const HomeScreen = ({navigation}: HomeScreenProps) => {
   const setSelectedAnimal = useGoodMenuStore(state => state.setSelectedAnimal);
   const setIsDrawerOpened = useGoodMenuStore(state => state.setIsDrawerOpened);
+  const setSearchQuery = useSearchStore(state => state.setSearchQuery);
+
+  const onSearchPress = () => {
+    setSearchQuery('');
+    navigation.navigate(Screens.CatalogNavigator, {
+      screen: Screens.Search,
+      initial: false,
+    });
+  };
 
   return (
     <View style={styles.container}>
+      <SearchButton onPress={onSearchPress} />
       <Image style={styles.img} source={ASSETS.bagira} />
       <View style={styles.row}>
         {icons.map(item => (
