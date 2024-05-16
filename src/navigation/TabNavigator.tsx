@@ -1,11 +1,11 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import HomeHeader from 'components/headers/HomeHeader';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {HomeScreen, ProfileScreen, CartScreen} from 'screens';
-import {useCartStore} from 'store/cartStore';
-import {Screens} from 'types/Screens';
 import CatalogNavigator, {CatalogNavigatorParamList} from './CatalogNavigator';
+import {HomeHeader} from 'components/headers';
+import {useCartStore} from 'store/cartStore';
 import {NavigatorScreenParams} from '@react-navigation/native';
+import {Screens} from 'types/Screens';
 
 type IconProps = {
   name: string;

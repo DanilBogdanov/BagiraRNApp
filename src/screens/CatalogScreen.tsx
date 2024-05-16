@@ -2,7 +2,7 @@ import {Pressable, StyleSheet, View} from 'react-native';
 import {Drawer} from 'react-native-drawer-layout';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import GoodMenu from 'components/menu/goodMenu/GoodMenu';
-import GoodList from 'components/lists/goodList/GoodList';
+import {CatalogList} from 'components/lists';
 import {useGoodMenuStore} from 'store/goodMenuStore';
 import {COLORS, SIZES} from 'constants/theme';
 import {StackScreenProps} from '@react-navigation/stack';
@@ -36,7 +36,7 @@ const CatalogScreen = ({navigation}: CatalogScreenProps) => {
             <Ionicons color={COLORS.white} size={30} name={'list-outline'} />
           </View>
         </Pressable>
-        <GoodList navigation={navigation} />
+        <CatalogList navigation={navigation} />
       </View>
     </Drawer>
   );

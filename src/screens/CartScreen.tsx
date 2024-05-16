@@ -1,7 +1,7 @@
 import {FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
-import CartGoodCard from 'components/cards/CartGoodCard';
-import EmptyCart from 'components/placeholders/EmptyCart';
-import CartSkeleton from 'components/placeholders/CartSkeleton';
+import {CartGoodCard} from 'components/cards';
+import {CartSkeleton} from 'components/skeletons';
+import {EmptyCart} from 'components/placeholders';
 import {useCartStore} from 'store/cartStore';
 import {useGoodListQuery} from 'queries/goodQuery';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';

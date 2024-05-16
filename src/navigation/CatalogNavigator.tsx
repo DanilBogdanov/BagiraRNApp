@@ -1,10 +1,11 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import CatalogHeader from 'components/headers/CatalogHeader';
-import {CatalogScreen, DetailedScreen} from 'screens';
+import {CatalogHeader, SearchHeader} from 'components/headers';
+import {CatalogScreen, DetailedScreen, SearchScreen} from 'screens';
 import {Screens} from 'types/Screens';
 
 export type CatalogNavigatorParamList = {
   [Screens.Catalog]: undefined;
+  [Screens.Search]: undefined;
   [Screens.Detailed]: {id: number};
 };
 
@@ -18,6 +19,14 @@ const CatalogNavigator = () => {
         component={CatalogScreen}
         options={{
           headerTitle: CatalogHeader,
+        }}
+      />
+      <Stack.Screen
+        name={Screens.Search}
+        component={SearchScreen}
+        options={{
+          headerTitle: SearchHeader,
+          animation: 'slide_from_right',
         }}
       />
       <Stack.Screen
