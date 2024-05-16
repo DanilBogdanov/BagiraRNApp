@@ -1,8 +1,8 @@
-import {BuyButton} from 'components/buttons';
 import {StyleSheet, Text, View} from 'react-native';
+import {BuyButton} from 'components/buttons';
+import CartCountAction from './cartCountAction/CartCountAction';
 import {useCartStore} from 'store/cartStore';
 import {GoodData} from 'types/good';
-import {CartCountAction} from '.';
 import {COLORS, SIZES} from 'constants/theme';
 
 type CardOrderBlockProps = {
