@@ -1,6 +1,6 @@
 import {memo} from 'react';
 import {Alert, Image, Pressable, StyleSheet, Text, View} from 'react-native';
-import {CartCountAction} from 'components/actions';
+import {CartCountAction, FavoriteAction} from 'components/actions';
 import {useCartStore} from 'store/cartStore';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {GoodData} from 'types/good';
@@ -11,9 +11,10 @@ const BASE_URL = 'https://danildev.net/';
 type CartGoodCardProps = {
   goodData: GoodData;
   cartCount: number;
+  isFavorite: boolean;
 };
 
-const CartGoodCard = ({goodData, cartCount}: CartGoodCardProps) => {
+const CartGoodCard = ({goodData, cartCount, isFavorite}: CartGoodCardProps) => {
   const removeFromCart = useCartStore(state => state.remove);
 
   const onRemoveFromCart = () => {
@@ -54,13 +55,21 @@ const CartGoodCard = ({goodData, cartCount}: CartGoodCardProps) => {
               <Text style={styles.priceCount}>
                 {goodData.price * (cartCount ?? 0)}₽
               </Text>
-              <Pressable style={styles.deleteBtn} onPress={onRemoveFromCart}>
-                <Ionicons
-                  color={COLORS.secondary}
-                  size={SIZES.md}
-                  name={'trash'}
+              <View style={styles.row}>
+                <FavoriteAction
+                  goodId={goodData.id}
+                  isFavorite={isFavorite}
+                  isInactiveOutline
+                  inactiveColor={COLORS.secondary}
                 />
-              </Pressable>
+                <Pressable style={styles.deleteBtn} onPress={onRemoveFromCart}>
+                  <Ionicons
+                    color={COLORS.secondary}
+                    size={SIZES.md}
+                    name={'trash'}
+                  />
+                </Pressable>
+              </View>
             </View>
           </View>
         </View>
@@ -97,6 +106,11 @@ const styles = StyleSheet.create({
   col: {
     alignItems: 'center',
     rowGap: SIZES.sm,
+  },
+  row: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    columnGap: SIZES.sm,
   },
   leftCol: {
     width: 140,
