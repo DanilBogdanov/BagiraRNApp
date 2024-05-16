@@ -6,4 +6,5 @@ export enum Screens {
   Detailed = 'Detailed',
   Profile = 'Profile',
   Cart = 'Cart',
+  Favorite = 'Favorite',
 }
