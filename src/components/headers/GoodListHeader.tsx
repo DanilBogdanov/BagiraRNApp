@@ -1,6 +1,6 @@
-import {COLORS, SIZES} from 'constants/theme';
 import {memo} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
+import {COLORS, SIZES} from 'constants/theme';
 
 type GoodListHeaderProps = {
   count: number;
