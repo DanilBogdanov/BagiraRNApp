@@ -8,7 +8,8 @@ import {
 } from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {CatalogNavigatorParamList} from 'navigation/CatalogNavigator';
-import {CardOrderBlock} from 'components/actions';
+import {CardOrderBlock, FavoriteAction} from 'components/actions';
+import {useFavoriteStore} from 'store/favoriteStore';
 import {useGoodQuery} from 'queries/goodQuery';
 import {Screens} from 'types/Screens';
 import {COLORS, SIZES} from 'constants/theme';
@@ -22,6 +23,7 @@ type DetailedScreenProps = StackScreenProps<
 
 const DetailedScreen = ({route}: DetailedScreenProps) => {
   const {data: goodData, isSuccess, isLoading} = useGoodQuery(route.params.id);
+  const favorite = useFavoriteStore(state => state.favorite);
 
   return (
     <View style={styles.container}>
@@ -32,6 +34,13 @@ const DetailedScreen = ({route}: DetailedScreenProps) => {
             <Image
               style={styles.img}
               source={{uri: BASE_URL + goodData.imgUrl}}
+            />
+            <FavoriteAction
+              goodId={goodData.id}
+              isFavorite={favorite.has(goodData.id)}
+              absolute
+              isInactiveOutline
+              inactiveColor={COLORS.secondary}
             />
             <Text style={styles.title}>{goodData.name}</Text>
             <Text style={styles.description}>{goodData.description}</Text>

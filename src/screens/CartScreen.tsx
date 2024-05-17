@@ -1,8 +1,9 @@
 import {FlatList, Pressable, StyleSheet, Text, View} from 'react-native';
-import CartGoodCard from 'components/cards/CartGoodCard';
-import EmptyCart from 'components/placeholders/EmptyCart';
-import CartSkeleton from 'components/placeholders/CartSkeleton';
+import {CartGoodCard} from 'components/cards';
+import {CartSkeleton} from 'components/skeletons';
+import {EmptyCart} from 'components/placeholders';
 import {useCartStore} from 'store/cartStore';
+import {useFavoriteStore} from 'store/favoriteStore';
 import {useGoodListQuery} from 'queries/goodQuery';
 import {BottomTabScreenProps} from '@react-navigation/bottom-tabs';
 import {TabNavigatorParamList} from 'navigation/TabNavigator';
@@ -16,6 +17,7 @@ type CartScreenProps = BottomTabScreenProps<
 
 const CartScreen = ({navigation}: CartScreenProps) => {
   const cart = useCartStore(state => state.cart);
+  const favorite = useFavoriteStore(state => state.favorite);
   const removeFromCart = useCartStore(state => state.remove);
 
   const keys = Array.from(cart.keys());
@@ -70,6 +72,7 @@ const CartScreen = ({navigation}: CartScreenProps) => {
                   <CartGoodCard
                     goodData={good}
                     cartCount={cart.get(good.id) ?? 0}
+                    isFavorite={favorite.has(good.id)}
                   />
                 )}
               />

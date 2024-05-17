@@ -1,9 +1,9 @@
+import {memo, useState} from 'react';
 import {Pressable, StyleSheet, Text, TextInput, View} from 'react-native';
 import CartCountButton from './CartCountButton';
-import {COLORS, SIZES} from 'constants/theme';
-import {memo, useState} from 'react';
-import {CART_COUNT_LIMIT} from 'constants/cart';
 import {useCartStore} from 'store/cartStore';
+import {COLORS, SIZES} from 'constants/theme';
+import {CART_COUNT_LIMIT} from 'constants/cart';
 
 const checkInput = (input: string): string => {
   let text = input.replace(/[^0-9]/g, '');

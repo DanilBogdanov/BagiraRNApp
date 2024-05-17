@@ -1,6 +1,6 @@
 import {memo} from 'react';
 import {Image, Pressable, StyleSheet, Text} from 'react-native';
-import {CartCountAction} from 'components/actions';
+import {CartCountAction, FavoriteAction} from 'components/actions';
 import {BuyButton} from 'components/buttons';
 import {GoodData} from 'types/good';
 import {COLORS, SIZES} from 'constants/theme';
@@ -10,10 +10,16 @@ const BASE_URL = 'https://danildev.net/';
 type GoodCardProps = {
   goodData: GoodData;
   cartCount?: number;
+  isFavorite: boolean;
   onPress: (id: number) => void;
 };
 
-const GoodCard = ({goodData, cartCount, onPress}: GoodCardProps) => {
+const GoodCard = ({
+  goodData,
+  cartCount,
+  onPress,
+  isFavorite,
+}: GoodCardProps) => {
   return (
     <Pressable style={styles.container} onPress={() => onPress(goodData.id)}>
       <Image
@@ -22,6 +28,7 @@ const GoodCard = ({goodData, cartCount, onPress}: GoodCardProps) => {
         height={130}
         width={130}
       />
+      <FavoriteAction goodId={goodData.id} isFavorite={isFavorite} absolute />
       <Text numberOfLines={4} style={styles.title}>
         {goodData.name}
       </Text>
