@@ -4,6 +4,7 @@ import {FlashList} from '@shopify/flash-list';
 import {GoodListHeader} from 'components/headers';
 import {GoodCard} from 'components/cards';
 import {useCartStore} from 'store/cartStore';
+import {useFavoriteStore} from 'store/favoriteStore';
 import {InfiniteData} from '@tanstack/react-query';
 import {GoodData, GoodResponse} from 'types/good';
 import {SIZES} from 'constants/theme';
@@ -27,9 +28,10 @@ const GoodList = ({
   fetchNextPage,
   onPress,
 }: GoodListProps) => {
-  const listRef = useRef<FlashList<GoodData> | null>(null);
-  const cart = useCartStore(state => state.cart);
   const [count, setCount] = useState(0);
+  const cart = useCartStore(state => state.cart);
+  const favorite = useFavoriteStore(state => state.favorite);
+  const listRef = useRef<FlashList<GoodData> | null>(null);
 
   useEffect(() => {
     listRef.current?.scrollToOffset({offset: 0});
@@ -38,7 +40,12 @@ const GoodList = ({
   }, [queryKey]);
 
   const renderItem = ({item}: {item: GoodData}) => (
-    <GoodCard goodData={item} cartCount={cart.get(item.id)} onPress={onPress} />
+    <GoodCard
+      goodData={item}
+      cartCount={cart.get(item.id)}
+      onPress={onPress}
+      isFavorite={favorite.has(item.id)}
+    />
   );
 
   return (

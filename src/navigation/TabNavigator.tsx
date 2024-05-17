@@ -1,6 +1,9 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {HomeScreen, ProfileScreen, CartScreen} from 'screens';
+import FavoriteNavigator, {
+  FavoriteNavigatorParamList,
+} from './FavoriteNavigator';
 import CatalogNavigator, {CatalogNavigatorParamList} from './CatalogNavigator';
 import {HomeHeader} from 'components/headers';
 import {useCartStore} from 'store/cartStore';
@@ -27,6 +30,7 @@ export type TabNavigatorParamList = {
   [Screens.CatalogNavigator]: NavigatorScreenParams<CatalogNavigatorParamList>;
   [Screens.Profile]: undefined;
   [Screens.Cart]: undefined;
+  [Screens.FavoriteNavigator]: NavigatorScreenParams<FavoriteNavigatorParamList>;
 };
 
 const Tab = createBottomTabNavigator<TabNavigatorParamList>();
@@ -55,14 +59,6 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name={Screens.Profile}
-        component={ProfileScreen}
-        options={{
-          title: 'Профиль',
-          tabBarIcon: prop => icon({name: 'person', ...prop}),
-        }}
-      />
-      <Tab.Screen
         name={Screens.Cart}
         component={CartScreen}
         options={{
@@ -73,6 +69,24 @@ const TabNavigator = () => {
             0,
           ),
           tabBarIcon: prop => icon({name: 'cart', ...prop}),
+        }}
+      />
+      <Tab.Screen
+        name={Screens.Profile}
+        component={ProfileScreen}
+        options={{
+          title: 'Профиль',
+          tabBarIcon: prop => icon({name: 'person', ...prop}),
+        }}
+      />
+      <Tab.Screen
+        name={Screens.FavoriteNavigator}
+        component={FavoriteNavigator}
+        options={{
+          unmountOnBlur: true,
+          title: 'Избранное',
+          headerShown: false,
+          tabBarIcon: prop => icon({name: 'heart', ...prop}),
         }}
       />
     </Tab.Navigator>
