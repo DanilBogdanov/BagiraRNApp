@@ -1,12 +1,14 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {HomeScreen, ProfileScreen, CartScreen} from 'screens';
+import FavoriteNavigator, {
+  FavoriteNavigatorParamList,
+} from './FavoriteNavigator';
 import CatalogNavigator, {CatalogNavigatorParamList} from './CatalogNavigator';
 import {HomeHeader} from 'components/headers';
 import {useCartStore} from 'store/cartStore';
 import {NavigatorScreenParams} from '@react-navigation/native';
 import {Screens} from 'types/Screens';
-import FavoriteScreen from 'screens/FavoriteScreen';
 
 type IconProps = {
   name: string;
@@ -28,7 +30,7 @@ export type TabNavigatorParamList = {
   [Screens.CatalogNavigator]: NavigatorScreenParams<CatalogNavigatorParamList>;
   [Screens.Profile]: undefined;
   [Screens.Cart]: undefined;
-  [Screens.Favorite]: undefined;
+  [Screens.FavoriteNavigator]: NavigatorScreenParams<FavoriteNavigatorParamList>;
 };
 
 const Tab = createBottomTabNavigator<TabNavigatorParamList>();
@@ -78,11 +80,12 @@ const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name={Screens.Favorite}
-        component={FavoriteScreen}
+        name={Screens.FavoriteNavigator}
+        component={FavoriteNavigator}
         options={{
           unmountOnBlur: true,
           title: 'Избранное',
+          headerShown: false,
           tabBarIcon: prop => icon({name: 'heart', ...prop}),
         }}
       />
