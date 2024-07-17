@@ -1,8 +1,9 @@
+import Config from 'react-native-config';
 import axios from 'axios';
 import {Animal} from 'types/goodMenu';
 import {GoodData, GoodRequest, GoodResponse, SearchRequest} from 'types/good';
 
-const BASE_URL = 'https://danildev.net/api/bagira/v1/goods';
+const BASE_URL = `${Config.API_URL}/api/bagira/v1/goods`;
 
 export async function getGood(id: number) {
   const path = `${BASE_URL}/${id}`;
