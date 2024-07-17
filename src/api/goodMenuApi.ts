@@ -1,7 +1,8 @@
+import Config from 'react-native-config';
 import axios from 'axios';
 import {Animal, GoodMenuData} from 'types/goodMenu';
 
-const BASE_URL = 'https://danildev.net/api/bagira/v1/Menu';
+const BASE_URL = `${Config.API_URL}/api/bagira/v1/Menu`;
 
 export async function getGoodMenu(animal: Animal): Promise<GoodMenuData[]> {
   let path = BASE_URL;
